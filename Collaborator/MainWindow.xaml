@@ -1,0 +1,218 @@
+﻿<Window x:Class="Collaborator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Collaborator"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="550" Width="500"
+        AllowsTransparency="True" Background="Transparent"
+        ResizeMode="NoResize" 
+        WindowStyle="None" 
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border CornerRadius="10" Grid.RowSpan="3">
+                <Border.Background>
+                    <LinearGradientBrush>
+
+                        <GradientStop Color="#008080" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            
+            <iconPacks:PackIconMaterial 
+                Name="closeIcon"
+                Kind="Close"
+                VerticalAlignment="Top" HorizontalAlignment="Right" 
+                Foreground="White"
+                Margin="0, 20, 20, 0"
+                MouseDown="PackIconMaterial_MouseDown"
+                MouseEnter="PackIconMaterial_MouseEnter"
+                MouseLeave="closeIcon_MouseLeave"/>
+            
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Collaborator" 
+                           HorizontalAlignment="Center"
+                           FontWeight="Light"
+                           FontFamily="BankGothic Md BT"
+                           FontSize="40" 
+                           Foreground="White"/>
+                <StackPanel x:Name="TopLoginPanel" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 10, 0, 0">
+                    <iconPacks:PackIconMaterial Kind="Login"
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Center" 
+                                            Foreground="White"/>
+                    <TextBlock Text="Login" 
+                           HorizontalAlignment="Center"
+                           Height="30"
+                           FontWeight="Light"
+                           FontFamily="helvetica"
+                           FontSize="25" 
+                           Foreground="White"/>
+                </StackPanel>
+                <StackPanel x:Name="TopRegisterPanel" Orientation="Horizontal" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0, 10, 0, 0">
+                    <iconPacks:PackIconMaterial Kind="Login"
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Center" 
+                                            Foreground="White"/>
+                    <TextBlock Text="Register" 
+                           HorizontalAlignment="Center"
+                           Height="30"
+                           FontWeight="Light"
+                           FontFamily="helvetica"
+                           FontSize="25" 
+                           Foreground="White"/>
+                </StackPanel>
+                <TextBlock 
+                    x:Name="ErrorMessage"
+                    Text="No Internet Connection!"
+                    HorizontalAlignment="Center"
+                    Height="30"
+                    FontWeight="Light"
+                    FontFamily="helvetica"
+                    FontSize="20" 
+                    Foreground="Red"
+                    Visibility="Collapsed"
+                    Margin="0, 20, 0, 0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox 
+                        x:Name="UsernameBox"
+                        Text="Username"
+                        FontFamily="Helvetica" FontWeight="Light" FontSize="20"
+                        Background="Transparent" Foreground="White"
+                        HorizontalAlignment="Center" 
+                        BorderThickness="0"
+                        Width="180"
+                        HorizontalContentAlignment="Left"
+                        Opacity="0.8"
+                        Height="25"
+                        Margin="150, 0, 0, 0" />
+                    <iconPacks:PackIconMaterial 
+                        Kind="Account" 
+                        VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        Foreground="White" />
+                </StackPanel>
+                <Border Width="200"
+                    Height="2"
+                    Background="White"
+                    Opacity="0.5"/>
+
+                <StackPanel Name="FullNamePanel" Visibility="Collapsed">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox 
+                            x:Name="FullNameBox"
+                            Text="Full Name"
+                            FontFamily="Helvetica" FontWeight="Light" FontSize="20"
+                            Background="Transparent" Foreground="White"
+                            HorizontalAlignment="Center" 
+                            BorderThickness="0"
+                            Width="180"
+                            HorizontalContentAlignment="Left"
+                            Opacity="0.8"
+                            Height="25"
+                            Margin="150, 5, 0, 0" />
+                        <iconPacks:PackIconMaterial 
+                            Kind="AccountBox "
+                            VerticalAlignment="Center" HorizontalAlignment="Center" 
+                            Foreground="White" />
+                    </StackPanel>
+                    <Border 
+                        Width="200"
+                        Height="2"
+                        Background="White"
+                        Opacity="0.5"/>
+                </StackPanel>
+                
+
+                <StackPanel Orientation="Horizontal">
+                    <PasswordBox 
+                        x:Name="PasswordBox"
+                        Password="Password"
+                        FontFamily="Helvetica" FontWeight="Light" FontSize="20"
+                        Background="Transparent" Foreground="White"
+                        HorizontalAlignment="Center" 
+                        BorderThickness="0"
+                        Width="180"
+                        HorizontalContentAlignment="Left"
+                        Opacity="0.8"
+                        Height="25"
+                        Margin="150, 5, 0, 0"/>
+                    <iconPacks:PackIconMaterial 
+                        Kind="TextboxPassword"
+                        VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        Foreground="White" />
+                </StackPanel>
+                <Border Width="200"
+                    Height="2"
+                    Background="White"
+                    Opacity="0.5"/>
+
+                <StackPanel x:Name="BottomLoginPanel" HorizontalAlignment="Center" Margin="20">
+                    <Button
+                        x:Name="LoginButton"
+                        Content="Login"
+                        Height="40" Width="70"
+                        FontSize="22" FontWeight="Light" FontFamily="Helvetica" 
+                        Background="Transparent" Foreground="White" 
+                        BorderBrush="AliceBlue" BorderThickness="2"
+                        Click="LoginButton_Click"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 30, 0, 0">
+                        <TextBlock 
+                            FontFamily="Helvetica" FontWeight="Light" FontSize="20"
+                            Foreground="White">
+                            Dont't have an account?</TextBlock>
+                        <TextBlock
+                            x:Name="RegisterBlock"
+                            FontFamily="Helvetica" FontWeight="Bold" FontSize="20"
+                            Foreground="White"
+                            Margin="5, 0, 0, 0"
+                            MouseDown="RegisterBlock_MouseDown">
+                            Register
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel x:Name="BottomRegisterPanel" Visibility="Collapsed" HorizontalAlignment="Center" Margin="20">
+                    <Button 
+                        Name="RegisterButton"
+                        Content="Register" 
+                        Height="40" Width="90"
+                        FontSize="22" FontWeight="Light" FontFamily="Helvetica" 
+                        Foreground="White" Background="Transparent" 
+                        BorderBrush="AliceBlue" BorderThickness="2" 
+                        Margin="0, 0, 0, 0"
+                        Click="RegisterButton_Click"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 30, 0, 0">
+                        <TextBlock 
+                            FontFamily="Helvetica" FontWeight="Light" FontSize="20"
+                            Foreground="White">
+                            Already have an account?</TextBlock>
+                        <TextBlock
+                            Name="LoginBlock"
+                            FontFamily="Helvetica" FontWeight="Bold" FontSize="20"
+                            Foreground="White"
+                            Margin="5, 0, 0, 0"
+                            MouseDown="LoginBlock_MouseDown">
+                            Login
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</Window>
