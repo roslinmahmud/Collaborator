@@ -22,7 +22,6 @@ namespace Collaborator
         {
             DBConnection.Instance.Connect();
             string query = "SELECT * FROM USER WHERE USERNAME='" + username + "' AND PASSWORD='" + password + "';";
-            MessageBox.Show(query);
             try
             {
                 using (MySqlCommand mySqlCommand = new MySqlCommand(query, DBConnection.Instance.Connection))

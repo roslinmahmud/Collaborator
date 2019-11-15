@@ -57,7 +57,7 @@ namespace Collaborator
             Login login = new Login(UsernameBox.Text, PasswordBox.Password);
             if (login.Perform())
             {
-                MessageBox.Show("Successfully login");
+                MessageBox.Show("Login successfull");
             }
             else
             {

@@ -37,9 +37,8 @@ namespace Collaborator
             {
                 using (MySqlCommand mySqlCommand = new MySqlCommand(query, DBConnection.Instance.Connection))
                 {
-                    MessageBox.Show(mySqlCommand.ExecuteNonQuery().ToString());
+                    return mySqlCommand.ExecuteNonQuery()== 1 ? true : false;
                 }
-                return true;
             }
             catch(Exception e)
             {
