@@ -69,7 +69,6 @@ namespace Collaborator
                 finally
                 {
                     Thread.Sleep(3000);
-
                 }
             }
         }

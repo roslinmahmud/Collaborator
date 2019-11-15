@@ -24,9 +24,9 @@ namespace Collaborator
         public MainWindow()
         {
             InitializeComponent();
-            DBConnection.Instance.MainWindow = this;
-            Thread DBConnect = new Thread(new ThreadStart(DBConnection.Instance.CheckInternetConnection));
-            DBConnect.Start();
+            Connection.Instance.MainWindow = this;
+            Thread Connect = new Thread(new ThreadStart(Connection.Instance.CheckInternetConnection));
+            Connect.Start();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -54,30 +54,28 @@ namespace Collaborator
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            string sql = "SELECT USERNAME, PASSWORD FROM USER";
-            try
+            Login login = new Login(UsernameBox.Text, PasswordBox.Password);
+            if (login.Perform())
             {
-                DBConnection.Instance.Connect();
-                using(MySqlCommand mySqlCommand = new MySqlCommand(sql, DBConnection.Instance.Connection)){
-                    MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
-                    MessageBox.Show("connected");
-                    while (mySqlDataReader.Read())
-                    {
-                        MessageBox.Show(mySqlDataReader.GetString(1));
-                    }
-                }
-
+                MessageBox.Show("Successfully login");
             }
-            catch (Exception ec)
+            else
             {
-                DBConnection.Instance.Connection = null;
-                MessageBox.Show(this.ToString() + " Exception: " + ec.Message);
+                MessageBox.Show("Login failed");
             }
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            Register register = new Register(UsernameBox.Text, FullNameBox.Text, PasswordBox.Password);
+            if (register.Perform())
+            {
+                MessageBox.Show("Registered successfully");
+            }
+            else
+            {
+                MessageBox.Show("Registration failed");
+            }
         }
 
         private void RegisterBlock_MouseDown(object sender, MouseButtonEventArgs e)

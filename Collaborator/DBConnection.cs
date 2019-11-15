@@ -90,45 +90,5 @@ namespace Collaborator
         {
             return !(connection == null);
         }
-        
-        public void CheckInternetConnection()
-        {
-            while (true)
-            {
-                try
-                {
-                    if(ping.Send("www.google.com.mx").Status == IPStatus.Success)
-                    {
-                        if (mainWindow.ErrorMessage.IsVisible)
-                        {
-                            mainWindow.Dispatcher.Invoke(() =>
-                            {
-                                mainWindow.ErrorMessage.Visibility = Visibility.Collapsed;
-                            });
-
-                        }
-                        if(!IsConnect())
-                        {
-                            Connect();
-                        }
-                    }
-                    
-                }
-                catch(Exception e)
-                {
-                    mainWindow.Dispatcher.Invoke(() =>
-                    {
-                        mainWindow.ErrorMessage.Visibility = Visibility.Visible;
-                    });
-                    DBConnection.Instance.Connection = null;
-                }
-                finally
-                {
-                    Thread.Sleep(3000);
-                    
-                }
-            }
-        }
-
     }
 }
