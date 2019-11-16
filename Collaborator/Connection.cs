@@ -45,7 +45,7 @@ namespace Collaborator
                     {
                         if (mainWindow.ErrorMessage.IsVisible)
                         {
-                            mainWindow.Dispatcher.Invoke(() =>
+                            Application.Current.Dispatcher.Invoke(() =>
                             {
                                 mainWindow.ErrorMessage.Visibility = Visibility.Collapsed;
                             });
@@ -60,7 +60,7 @@ namespace Collaborator
                 }
                 catch (Exception e)
                 {
-                    mainWindow.Dispatcher.Invoke(() =>
+                    Application.Current.Dispatcher.Invoke(() =>
                     {
                         mainWindow.ErrorMessage.Visibility = Visibility.Visible;
                     });
