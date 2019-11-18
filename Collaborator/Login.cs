@@ -26,7 +26,14 @@ namespace Collaborator
             {
                 using (MySqlCommand mySqlCommand = new MySqlCommand(query, DBConnection.Instance.Connection))
                 {
-                    return mySqlCommand.ExecuteReader().HasRows;
+                    if(mySqlCommand.ExecuteReader().HasRows)
+                    {
+                        Properties.Settings.Default.UserName = username;
+                        Properties.Settings.Default.Password = password;
+                        Properties.Settings.Default.Save();
+                        return true;
+                    }
+                    return false;
                 }
             }
             catch (Exception e)
@@ -34,6 +41,10 @@ namespace Collaborator
                 MessageBox.Show(e.Message, this.ToString() + " Perform() Exception", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
+        }
+        public bool Saved()
+        {
+            return Properties.Settings.Default.UserName != string.Empty && Properties.Settings.Default.Password != string.Empty;
         }
     }
 }

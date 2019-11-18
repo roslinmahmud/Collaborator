@@ -27,6 +27,13 @@ namespace Collaborator
             Connection.Instance.MainWindow = this;
             Thread Connect = new Thread(new ThreadStart(Connection.Instance.CheckInternetConnection));
             Connect.Start();
+            if(new Login().Saved())
+            {
+                Dashboard dashboard = new Dashboard();
+                dashboard.Show();
+                this.Hide();
+                dashboard.MainWindowInstance = this;
+            }
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -57,7 +64,10 @@ namespace Collaborator
             Login login = new Login(UsernameBox.Text, PasswordBox.Password);
             if (login.Perform())
             {
-                MessageBox.Show("Login successfull");
+                Dashboard dashboard = new Dashboard();
+                dashboard.Show();
+                this.Hide();
+                dashboard.MainWindowInstance = this;
             }
             else
             {

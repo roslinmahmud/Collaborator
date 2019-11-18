@@ -47,6 +47,12 @@
     <Reference Include="MahApps.Metro.IconPacks.Material, Version=2.3.0.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.Material.2.3.0\lib\net46\MahApps.Metro.IconPacks.Material.dll</HintPath>
     </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.2.0.325, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.2.0\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.6.0.325, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.6.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.0.18.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.18\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
@@ -88,8 +94,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Connection.cs" />
+    <Compile Include="Dashboard.xaml.cs">
+      <DependentUpon>Dashboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs" />
     <Compile Include="Register.cs" />
+    <Page Include="Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -130,6 +143,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Avatar\boy-1.png" />
+    <Resource Include="Avatar\boy.png" />
+    <Resource Include="Avatar\girl-1.png" />
+    <Resource Include="Avatar\girl.png" />
+    <Resource Include="Avatar\man.png" />
+    <Resource Include="Avatar\user.png" />
+    <Resource Include="Avatar\woman-1.png" />
+    <Resource Include="Avatar\woman-2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

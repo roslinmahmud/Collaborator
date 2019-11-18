@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Collaborator"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="500"
         AllowsTransparency="True" Background="Transparent"
@@ -12,6 +14,9 @@
         WindowStyle="None" 
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown">
+    <Window.Resources>
+        <sys:String x:Key="AppName">Collaborator</sys:String>
+    </Window.Resources>
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -37,9 +42,9 @@
                 MouseDown="PackIconMaterial_MouseDown"
                 MouseEnter="PackIconMaterial_MouseEnter"
                 MouseLeave="closeIcon_MouseLeave"/>
-            
+
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="Collaborator" 
+                <TextBlock Text="{StaticResource AppName}" 
                            HorizontalAlignment="Center"
                            FontWeight="Light"
                            FontFamily="BankGothic Md BT"
@@ -87,8 +92,8 @@
             <StackPanel Grid.Row="1">
                 <StackPanel Orientation="Horizontal">
                     <TextBox 
+                        materialDesign:HintAssist.Hint="Username"
                         x:Name="UsernameBox"
-                        Text="Username"
                         FontFamily="Helvetica" FontWeight="Light" FontSize="20"
                         Background="Transparent" Foreground="White"
                         HorizontalAlignment="Center" 
@@ -96,7 +101,7 @@
                         Width="180"
                         HorizontalContentAlignment="Left"
                         Opacity="0.8"
-                        Height="25"
+                        Height="30"
                         Margin="150, 0, 0, 0" />
                     <iconPacks:PackIconMaterial 
                         Kind="Account" 
@@ -111,8 +116,8 @@
                 <StackPanel Name="FullNamePanel" Visibility="Collapsed">
                     <StackPanel Orientation="Horizontal">
                         <TextBox 
+                            materialDesign:HintAssist.Hint="Full Name"
                             x:Name="FullNameBox"
-                            Text="Full Name"
                             FontFamily="Helvetica" FontWeight="Light" FontSize="20"
                             Background="Transparent" Foreground="White"
                             HorizontalAlignment="Center" 
@@ -120,8 +125,8 @@
                             Width="180"
                             HorizontalContentAlignment="Left"
                             Opacity="0.8"
-                            Height="25"
-                            Margin="150, 5, 0, 0" />
+                            Height="30"
+                            Margin="150, 0, 0, 0" />
                         <iconPacks:PackIconMaterial 
                             Kind="AccountBox "
                             VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -137,8 +142,8 @@
 
                 <StackPanel Orientation="Horizontal">
                     <PasswordBox 
+                        materialDesign:HintAssist.Hint="Password"
                         x:Name="PasswordBox"
-                        Password="Password"
                         FontFamily="Helvetica" FontWeight="Light" FontSize="20"
                         Background="Transparent" Foreground="White"
                         HorizontalAlignment="Center" 
@@ -146,7 +151,7 @@
                         Width="180"
                         HorizontalContentAlignment="Left"
                         Opacity="0.8"
-                        Height="25"
+                        Height="30"
                         Margin="150, 5, 0, 0"/>
                     <iconPacks:PackIconMaterial 
                         Kind="TextboxPassword"
@@ -162,10 +167,10 @@
                     <Button
                         x:Name="LoginButton"
                         Content="Login"
-                        Height="40" Width="70"
+                        Height="40" Width="90"
                         FontSize="22" FontWeight="Light" FontFamily="Helvetica" 
                         Background="Transparent" Foreground="White" 
-                        BorderBrush="AliceBlue" BorderThickness="2"
+                        BorderBrush="AliceBlue" BorderThickness="1"
                         Click="LoginButton_Click"/>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 30, 0, 0">
@@ -188,10 +193,10 @@
                     <Button 
                         Name="RegisterButton"
                         Content="Register" 
-                        Height="40" Width="90"
+                        Height="40" Width="110"
                         FontSize="22" FontWeight="Light" FontFamily="Helvetica" 
                         Foreground="White" Background="Transparent" 
-                        BorderBrush="AliceBlue" BorderThickness="2" 
+                        BorderBrush="AliceBlue" BorderThickness="1" 
                         Margin="0, 0, 0, 0"
                         Click="RegisterButton_Click"/>
 

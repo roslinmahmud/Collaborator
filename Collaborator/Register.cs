@@ -37,7 +37,14 @@ namespace Collaborator
             {
                 using (MySqlCommand mySqlCommand = new MySqlCommand(query, DBConnection.Instance.Connection))
                 {
-                    return mySqlCommand.ExecuteNonQuery()== 1 ? true : false;
+                    if (mySqlCommand.ExecuteNonQuery() == 1)
+                    {
+                        Properties.Settings.Default.UserName = username;
+                        Properties.Settings.Default.Password = password;
+                        Properties.Settings.Default.Save();
+                        return true;
+                    }
+                    return false;
                 }
             }
             catch(Exception e)
