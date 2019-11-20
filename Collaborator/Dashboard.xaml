@@ -12,19 +12,41 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="250"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Background="AliceBlue">
-            <StackPanel Orientation="Horizontal" Background="White">
+        <Grid Grid.Column="0" Background="AliceBlue">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                <TextBox 
+                    x:Name="SearchTextBox"
+                    Margin="10 20" 
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                    materialDesign:HintAssist.Hint="Search"
+                    FontFamily="Helvetica" FontWeight="Light" FontSize="16"
+                    TextChanged="SearchTextBox_TextChanged"/>
+                <ListView>
+                    
+                </ListView>
+            </StackPanel>
+            
+            <StackPanel 
+                HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                Margin="10 10">
                 <Button 
                     x:Name="Logout"
+                    Background="Transparent"
                     Click="Logout_Click">
-                    <materialDesign:PackIcon 
-                        Kind="Logout" 
-                        Width="25" Height="25"
-                        Background="Red" Foreground="Green"/>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon 
+                            Kind="Logout" 
+                            Width="25" Height="25"
+                            Background="Transparent" Foreground="Black"/>
+                        <TextBlock
+                            Foreground="Black"
+                            FontFamily="Helvetica" FontWeight="DemiBold" FontSize="20">
+                            Logout
+                        </TextBlock>
+                    </StackPanel>
                 </Button>
             </StackPanel>
-        </StackPanel>
+        </Grid>
     </Grid>
 </Window>

@@ -37,5 +37,11 @@ namespace Collaborator
             mainWindow.Show();
             this.Close();
         }
+
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+
+        }
     }
 }

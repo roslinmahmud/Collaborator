@@ -154,5 +154,8 @@
     <Resource Include="Avatar\woman-1.png" />
     <Resource Include="Avatar\woman-2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DBSchema_1.0.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

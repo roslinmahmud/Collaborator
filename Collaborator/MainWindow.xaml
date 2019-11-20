@@ -126,7 +126,7 @@
                             HorizontalContentAlignment="Left"
                             Opacity="0.8"
                             Height="30"
-                            Margin="150, 0, 0, 0" />
+                            Margin="150, 5, 0, 0" />
                         <iconPacks:PackIconMaterial 
                             Kind="AccountBox "
                             VerticalAlignment="Center" HorizontalAlignment="Center" 
