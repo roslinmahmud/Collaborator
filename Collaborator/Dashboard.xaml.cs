@@ -23,6 +23,9 @@ namespace Collaborator
         public Dashboard()
         {
             InitializeComponent();
+            User user = new User();
+            List<User> users = user.List;
+            ContactList.ItemsSource = users;
         }
         public MainWindow MainWindowInstance
         {
@@ -34,13 +37,16 @@ namespace Collaborator
       
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
+            Properties.Settings.Default.UserName = string.Empty;
+            Properties.Settings.Default.Password = string.Empty;
+            Properties.Settings.Default.Save();
+
             mainWindow.Show();
             this.Close();
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
 
         }
     }

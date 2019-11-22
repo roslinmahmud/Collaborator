@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="Login.cs" />
     <Compile Include="Register.cs" />
+    <Compile Include="User.cs" />
     <Page Include="Dashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

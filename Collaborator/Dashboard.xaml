@@ -22,31 +22,41 @@
                     materialDesign:HintAssist.Hint="Search"
                     FontFamily="Helvetica" FontWeight="Light" FontSize="16"
                     TextChanged="SearchTextBox_TextChanged"/>
-                <ListView>
-                    
+                
+                <ListView x:Name="ContactList">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Photo_Path}" Width="30" Height="30"/>
+                                <TextBlock Text="{Binding Name}" Margin="10 10"
+                                           FontFamily="Helvetica" FontWeight="DemiBold" FontSize="15"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
             
-            <StackPanel 
-                HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                Margin="10 10">
-                <Button 
-                    x:Name="Logout"
+            <Button
+                x:Name="Logout"
                     Background="Transparent"
-                    Click="Logout_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon 
+                    Click="Logout_Click"
+                    HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                    Margin="10 10">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon 
                             Kind="Logout" 
                             Width="25" Height="25"
                             Background="Transparent" Foreground="Black"/>
-                        <TextBlock
+                    <TextBlock
                             Foreground="Black"
                             FontFamily="Helvetica" FontWeight="DemiBold" FontSize="20">
                             Logout
-                        </TextBlock>
-                    </StackPanel>
-                </Button>
-            </StackPanel>
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+        </Grid>
+        <Grid Grid.Column="1">
+            
         </Grid>
     </Grid>
 </Window>
