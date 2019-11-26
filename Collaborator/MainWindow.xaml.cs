@@ -24,10 +24,13 @@ namespace Collaborator
         public MainWindow()
         {
             InitializeComponent();
+
             Connection.Instance.MainWindow = this;
+
             Thread Connect = new Thread(new ThreadStart(Connection.Instance.CheckInternetConnection));
             Connect.Start();
-            if(new Login().Saved())
+
+            if(User.Instance.Saved())
             {
                 Dashboard dashboard = new Dashboard();
                 dashboard.Show();
@@ -61,18 +64,7 @@ namespace Collaborator
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            Login login = new Login(UsernameBox.Text, PasswordBox.Password);
-            if (login.Perform())
-            {
-                Dashboard dashboard = new Dashboard();
-                dashboard.Show();
-                this.Hide();
-                dashboard.MainWindowInstance = this;
-            }
-            else
-            {
-                MessageBox.Show("Login failed");
-            }
+            LogIn();
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
@@ -80,7 +72,7 @@ namespace Collaborator
             Register register = new Register(UsernameBox.Text, FullNameBox.Text, PasswordBox.Password);
             if (register.Perform())
             {
-                MessageBox.Show("Registered successfully");
+                LogIn();
             }
             else
             {
@@ -105,9 +97,20 @@ namespace Collaborator
             TopLoginPanel.Visibility = Visibility.Visible;
             BottomLoginPanel.Visibility = Visibility.Visible;
         }
-        public void ShowInternetConnectionError()
+        private void LogIn()
         {
-
+            Login login = new Login(UsernameBox.Text, PasswordBox.Password);
+            if (login.Perform())
+            {
+                Dashboard dashboard = new Dashboard();
+                dashboard.Show();
+                this.Hide();
+                dashboard.MainWindowInstance = this;
+            }
+            else
+            {
+                MessageBox.Show("Login failed");
+            }
         }
     }
 }

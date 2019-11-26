@@ -21,16 +21,16 @@ namespace Collaborator
         public bool Perform()
         {
             DBConnection.Instance.Connect();
-            string query = "SELECT * FROM USER WHERE USERNAME='" + username + "' AND PASSWORD='" + password + "';";
+            string query = "SELECT id, username, name, photo_path, ip FROM USER WHERE USERNAME='" + username + "' AND PASSWORD='" + password + "';";
             try
             {
                 using (MySqlCommand mySqlCommand = new MySqlCommand(query, DBConnection.Instance.Connection))
                 {
-                    if(mySqlCommand.ExecuteReader().HasRows)
+                    MySqlDataReader dataReader = mySqlCommand.ExecuteReader();
+                    if (dataReader.Read())
                     {
-                        Properties.Settings.Default.UserName = username;
-                        Properties.Settings.Default.Password = password;
-                        Properties.Settings.Default.Save();
+                        User.Instance.Init(dataReader);
+                        User.Instance.Save();
                         return true;
                     }
                     return false;
@@ -38,13 +38,10 @@ namespace Collaborator
             }
             catch (Exception e)
             {
+                DBConnection.Instance.Connection = null;
                 MessageBox.Show(e.Message, this.ToString() + " Perform() Exception", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-        }
-        public bool Saved()
-        {
-            return Properties.Settings.Default.UserName != string.Empty && Properties.Settings.Default.Password != string.Empty;
         }
     }
 }

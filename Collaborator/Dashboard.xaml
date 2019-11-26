@@ -13,17 +13,27 @@
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel
+            x:Name="TopPanel"
+            Orientation="Horizontal" VerticalAlignment="Top" Background="DarkCyan" Height="50" Grid.ColumnSpan="2"
+            MouseDown="TopPanel_MouseDown">
+
+        </StackPanel>
+
+        <Grid Grid.Column="0" Grid.Row="1" Background="White">
             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                 <TextBox 
                     x:Name="SearchTextBox"
                     Margin="10 20" 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                     materialDesign:HintAssist.Hint="Search"
-                    FontFamily="Helvetica" FontWeight="Light" FontSize="16"
-                    TextChanged="SearchTextBox_TextChanged"/>
-                
-                <ListView x:Name="ContactList">
+                    FontFamily="Helvetica" FontWeight="Light" FontSize="16"/>
+
+                <ListView x:Name="ContactList" SelectionChanged="ContactList_SelectionChanged">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -35,7 +45,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
-            
+
             <Button
                 x:Name="Logout"
                     Background="Transparent"
@@ -55,8 +65,17 @@
                 </StackPanel>
             </Button>
         </Grid>
-        <Grid Grid.Column="1">
-            
+        <Grid Grid.Column="1" Grid.Row="1" Background="AliceBlue">
+            <StackPanel Orientation="Horizontal" Height="50" Background="AliceBlue" VerticalAlignment="Top">
+                <StackPanel.Effect>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="1"/>
+                </StackPanel.Effect>
+                <TextBlock
+                    x:Name="HeaderTextBlock"
+                    FontFamily="Helvetica" FontWeight="DemiBold" FontSize="20"
+                    Text=""
+                    />
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

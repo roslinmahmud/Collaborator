@@ -39,9 +39,6 @@ namespace Collaborator
                 {
                     if (mySqlCommand.ExecuteNonQuery() == 1)
                     {
-                        Properties.Settings.Default.UserName = username;
-                        Properties.Settings.Default.Password = password;
-                        Properties.Settings.Default.Save();
                         return true;
                     }
                     return false;
@@ -49,6 +46,7 @@ namespace Collaborator
             }
             catch(Exception e)
             {
+                DBConnection.Instance.Connection = null;
                 MessageBox.Show(e.Message, this.ToString() + " Perform() Exception", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }

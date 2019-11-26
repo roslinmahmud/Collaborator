@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,13 +22,37 @@ namespace Collaborator
     public partial class Dashboard : Window
     {
         private MainWindow mainWindow = null;
+        List<User> users;
+        BackgroundWorker backgroundWorker = new BackgroundWorker();
         public Dashboard()
         {
             InitializeComponent();
-            User user = new User();
-            List<User> users = user.List;
+
+            backgroundWorker.DoWork += BackgroundWorker_DoWork;
+            backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
+            backgroundWorker.RunWorkerAsync();
+        }
+
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
             ContactList.ItemsSource = users;
         }
+
+
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            User.Instance.Init();
+            users = User.Instance.ContactList;
+        }
+        private void TopPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        public string FullName { get; set; }
         public MainWindow MainWindowInstance
         {
             set
@@ -37,17 +63,17 @@ namespace Collaborator
       
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.UserName = string.Empty;
-            Properties.Settings.Default.Password = string.Empty;
-            Properties.Settings.Default.Save();
-
+            User.Instance.UnSave();
             mainWindow.Show();
             this.Close();
         }
 
-        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void ContactList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            User user =(User) ContactList.SelectedItem;
+            FullName = user.Name;
+            HeaderTextBlock.Text = FullName;
         }
+
     }
 }
