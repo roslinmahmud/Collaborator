@@ -14,12 +14,12 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel
             x:Name="TopPanel"
-            Orientation="Horizontal" VerticalAlignment="Top" Background="DarkCyan" Height="50" Grid.ColumnSpan="2"
+            Orientation="Horizontal" VerticalAlignment="Top" Background="DarkCyan" Height="40" Grid.ColumnSpan="2"
             MouseDown="TopPanel_MouseDown">
 
         </StackPanel>
@@ -39,7 +39,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="{Binding Photo_Path}" Width="30" Height="30"/>
                                 <TextBlock Text="{Binding Name}" Margin="10 10"
-                                           FontFamily="Helvetica" FontWeight="DemiBold" FontSize="15"/>
+                                    FontFamily="Helvetica" FontWeight="DemiBold" FontSize="15"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -66,16 +66,48 @@
             </Button>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="1" Background="AliceBlue">
-            <StackPanel Orientation="Horizontal" Height="50" Background="AliceBlue" VerticalAlignment="Top">
-                <StackPanel.Effect>
-                    <DropShadowEffect BlurRadius="5" ShadowDepth="1"/>
-                </StackPanel.Effect>
-                <TextBlock
-                    x:Name="HeaderTextBlock"
-                    FontFamily="Helvetica" FontWeight="DemiBold" FontSize="20"
-                    Text=""
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <StackPanel Orientation="Horizontal" Height="50" Background="AliceBlue" VerticalAlignment="Top">
+                    <StackPanel.Effect>
+                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.1"/>
+                    </StackPanel.Effect>
+                    <TextBlock
+                        x:Name="HeaderTextBlock"
+                        Margin="5 5"
+                        FontFamily="Helvetica" FontWeight="DemiBold" FontSize="15"
                     />
-            </StackPanel>
+                </StackPanel>
+            </Grid>
+            
+            <Grid Grid.Row="1">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl x:Name="Chat_Message">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Border Background="White" CornerRadius="15 15 15 15" Margin="10 10">
+                                        <TextBlock
+                                            Margin="15"
+                                            FontFamily="Helvetica" FontWeight="Regular" FontSize="12"
+                                            Foreground="Black"
+                                            Text="{Binding Text}"/>
+                                    </Border>
+
+                                </Grid>
+
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+            <Grid Grid.Row="2">
+                <!-- Bottom Design -->
+            </Grid>
         </Grid>
     </Grid>
 </Window>

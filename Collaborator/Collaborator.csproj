@@ -98,7 +98,9 @@
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Login.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Register.cs" />
+    <Compile Include="Server.cs" />
     <Compile Include="User.cs" />
     <Page Include="Dashboard.xaml">
       <SubType>Designer</SubType>
@@ -154,9 +156,8 @@
     <Resource Include="Avatar\user.png" />
     <Resource Include="Avatar\woman-1.png" />
     <Resource Include="Avatar\woman-2.png" />
+    <Resource Include="DBSchema\DBSchema_1.0.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="DBSchema_1.0.txt" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

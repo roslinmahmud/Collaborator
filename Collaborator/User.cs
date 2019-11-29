@@ -1,9 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Sockets;
 using System.Windows;
 
 namespace Collaborator
@@ -12,6 +12,8 @@ namespace Collaborator
     {
         private static User user = null;
         private List<User> contactlist = new List<User>();
+        private TcpClient client = null;
+        internal ObservableCollection<Message> messages = new ObservableCollection<Message>();
         private User()
         {
 
@@ -29,6 +31,17 @@ namespace Collaborator
         public string Name { set; get; }
         public string Photo_Path { set; get; }
         public string Ip { set; get; }
+        public TcpClient Client
+        {
+            get
+            {
+                return client;
+            }
+            set
+            {
+                client = value;
+            }
+        }
         public static User Instance
         {
             get
@@ -114,6 +127,30 @@ namespace Collaborator
         public bool Saved()
         {
             return Properties.Settings.Default.UserName != string.Empty;
+        }
+        public bool CheckIP()
+        {
+            return Ip == Connection.HostIP;
+        }
+        public void UpdateIP()
+        {
+            DBConnection.Instance.Connect();
+            string query = "UPDATE USER SET IP='"+Connection.HostIP+"' WHERE USERNAME='" + Properties.Settings.Default.UserName + "';";
+            try
+            {
+                using (MySqlCommand mySqlCommand = new MySqlCommand(query, DBConnection.Instance.Connection))
+                {
+                    if(mySqlCommand.ExecuteNonQuery() == 1)
+                    {
+                        Ip = Connection.HostIP;
+                    }
+                }
+                
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, this.ToString() + " UpdateIP Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
     

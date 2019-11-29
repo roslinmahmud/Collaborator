@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -22,8 +23,9 @@ namespace Collaborator
     public partial class Dashboard : Window
     {
         private MainWindow mainWindow = null;
-        List<User> users;
-        BackgroundWorker backgroundWorker = new BackgroundWorker();
+        internal List<User> users;
+        private BackgroundWorker backgroundWorker = new BackgroundWorker();
+        Server server = null;
         public Dashboard()
         {
             InitializeComponent();
@@ -31,18 +33,25 @@ namespace Collaborator
             backgroundWorker.DoWork += BackgroundWorker_DoWork;
             backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             backgroundWorker.RunWorkerAsync();
+
+           
         }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             ContactList.ItemsSource = users;
+            server = new Server();
+            server.StartServer();
         }
-
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             User.Instance.Init();
             users = User.Instance.ContactList;
+            if (!User.Instance.CheckIP())
+            {
+                User.Instance.UpdateIP();
+            }
         }
         private void TopPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -70,9 +79,9 @@ namespace Collaborator
 
         private void ContactList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            User user =(User) ContactList.SelectedItem;
-            FullName = user.Name;
-            HeaderTextBlock.Text = FullName;
+            User user = ContactList.SelectedItem as User;
+            HeaderTextBlock.Text = user.Name;
+            Chat_Message.ItemsSource = user.messages;
         }
 
     }
