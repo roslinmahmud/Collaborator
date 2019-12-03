@@ -37,8 +37,15 @@ namespace Collaborator
 
             while (true)
             {
-                client = await server.AcceptTcpClientAsync();
-                AssignClient(client.Client.RemoteEndPoint.ToString().Split(':')[0]);
+                try
+                {
+                    client = await server.AcceptTcpClientAsync();
+                    AssignClient(client.Client.RemoteEndPoint.ToString().Split(':')[0]);
+                }
+                catch(Exception e)
+                {
+                    break;
+                }
             }
         }
 
@@ -83,6 +90,10 @@ namespace Collaborator
                     MessageBox.Show("Assigned to "+ users[i].Name);
                 }
             }
+        }
+        public void StopServer()
+        {
+            server.Stop();
         }
     }
 }

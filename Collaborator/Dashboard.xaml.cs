@@ -74,6 +74,7 @@ namespace Collaborator
         {
             User.Instance.UnSave();
             mainWindow.Show();
+            server.StopServer();
             this.Close();
         }
 
