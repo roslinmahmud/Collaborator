@@ -85,13 +85,14 @@
             </Grid>
             
             <Grid Grid.Row="1">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ItemsControl x:Name="Chat_Message">
+                <ScrollViewer x:Name="ChatMessageScroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl x:Name="ChatMessage">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <Border Background="White" CornerRadius="15 15 15 15" Margin="10 10">
+                                    <Border Background="LightGray" CornerRadius="10 10 10 10" Margin="10 10" Width="300" HorizontalAlignment="Left">
                                         <TextBlock
+                                            TextWrapping="Wrap"
                                             Margin="15"
                                             FontFamily="Helvetica" FontWeight="Regular" FontSize="12"
                                             Foreground="Black"

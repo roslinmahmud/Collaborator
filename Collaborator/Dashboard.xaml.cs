@@ -41,7 +41,7 @@ namespace Collaborator
         {
             ContactList.ItemsSource = users;
             server = new Server();
-            server.StartServer();
+            server.StartServer(ChatMessageScroll);
         }
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -82,7 +82,7 @@ namespace Collaborator
         {
             User user = ContactList.SelectedItem as User;
             HeaderTextBlock.Text = user.Name;
-            Chat_Message.ItemsSource = user.messages;
+            ChatMessage.ItemsSource = user.messages;
         }
 
     }

@@ -8,6 +8,7 @@ using System.Windows;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Threading;
+using System.Windows.Controls;
 
 namespace Collaborator
 {
@@ -18,6 +19,7 @@ namespace Collaborator
         IPAddress iPAddress = null;
         StringBuilder message = null;
         BackgroundWorker worker = null;
+        ScrollViewer scrollViewer = null;
         public Server()
         {
             iPAddress = IPAddress.Parse(Connection.HostIP);
@@ -26,8 +28,9 @@ namespace Collaborator
             message = new StringBuilder();
             worker = new BackgroundWorker();
         }
-        public async void StartServer()
+        public async void StartServer(ScrollViewer scrollViewer)
         {
+            this.scrollViewer = scrollViewer;
             server.Start();
             
             worker.DoWork += Worker_DoWork;
@@ -52,6 +55,7 @@ namespace Collaborator
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             User.Instance.ContactList[e.ProgressPercentage].messages.Add(new Message() { Text = message.ToString() });
+            scrollViewer.ScrollToBottom();
             message.Clear();
         }
 
