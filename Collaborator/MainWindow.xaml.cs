@@ -46,20 +46,18 @@ namespace Collaborator
                 DragMove();
             }
         }
-
-        private void PackIconMaterial_MouseDown(object sender, MouseButtonEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
         }
-
-        private void PackIconMaterial_MouseEnter(object sender, MouseEventArgs e)
+        private void CloseIcon_MouseEnter(object sender, MouseEventArgs e)
         {
-            closeIcon.Foreground = Brushes.Red;
+            CloseIcon.Foreground = Brushes.Red;
         }
 
-        private void closeIcon_MouseLeave(object sender, MouseEventArgs e)
+        private void CloseIcon_MouseLeave(object sender, MouseEventArgs e)
         {
-            closeIcon.Foreground = Brushes.White;
+            CloseIcon.Foreground = Brushes.White;
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -112,5 +110,6 @@ namespace Collaborator
                 MessageBox.Show("Login failed");
             }
         }
+
     }
 }

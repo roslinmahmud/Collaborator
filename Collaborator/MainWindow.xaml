@@ -32,16 +32,22 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
-            
-            <iconPacks:PackIconMaterial 
-                Name="closeIcon"
-                Kind="Close"
-                VerticalAlignment="Top" HorizontalAlignment="Right" 
-                Foreground="White"
-                Margin="0, 20, 20, 0"
-                MouseDown="PackIconMaterial_MouseDown"
-                MouseEnter="PackIconMaterial_MouseEnter"
-                MouseLeave="closeIcon_MouseLeave"/>
+
+            <StackPanel 
+                Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5 5">
+                <Button
+                    x:Name="CloseButton"
+                    Background="Transparent" BorderBrush="Transparent"
+                    Click="CloseButton_Click">
+                    <materialDesign:PackIcon
+                        Name="CloseIcon"
+                        Kind="Close" 
+                        Width="25" Height="25"
+                        Background="Transparent" Foreground="White"
+                        MouseEnter="CloseIcon_MouseEnter"
+                        MouseLeave="CloseIcon_MouseLeave"/>
+                </Button>
+            </StackPanel>
 
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="{StaticResource AppName}" 
@@ -51,10 +57,11 @@
                            FontSize="40" 
                            Foreground="White"/>
                 <StackPanel x:Name="TopLoginPanel" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 10, 0, 0">
-                    <iconPacks:PackIconMaterial Kind="Login"
-                                            VerticalAlignment="Center" 
-                                            HorizontalAlignment="Center" 
-                                            Foreground="White"/>
+                    <materialDesign:PackIcon 
+                        Kind="Login"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center" 
+                        Foreground="White"/>
                     <TextBlock Text="Login" 
                            HorizontalAlignment="Center"
                            Height="30"
@@ -63,11 +70,13 @@
                            FontSize="25" 
                            Foreground="White"/>
                 </StackPanel>
-                <StackPanel x:Name="TopRegisterPanel" Orientation="Horizontal" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0, 10, 0, 0">
-                    <iconPacks:PackIconMaterial Kind="Login"
-                                            VerticalAlignment="Center" 
-                                            HorizontalAlignment="Center" 
-                                            Foreground="White"/>
+                <StackPanel x:Name="TopRegisterPanel" Visibility="Collapsed"
+                            Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 10, 0, 0">
+                    <materialDesign:PackIcon 
+                        Kind="Login"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center" 
+                        Foreground="White"/>
                     <TextBlock Text="Register" 
                            HorizontalAlignment="Center"
                            Height="30"
@@ -103,7 +112,7 @@
                         Opacity="0.8"
                         Height="30"
                         Margin="150, 0, 0, 0" />
-                    <iconPacks:PackIconMaterial 
+                    <materialDesign:PackIcon 
                         Kind="Account" 
                         VerticalAlignment="Center" HorizontalAlignment="Center" 
                         Foreground="White" />
@@ -127,7 +136,7 @@
                             Opacity="0.8"
                             Height="30"
                             Margin="150, 5, 0, 0" />
-                        <iconPacks:PackIconMaterial 
+                        <materialDesign:PackIcon
                             Kind="AccountBox "
                             VerticalAlignment="Center" HorizontalAlignment="Center" 
                             Foreground="White" />
@@ -153,7 +162,7 @@
                         Opacity="0.8"
                         Height="30"
                         Margin="150, 5, 0, 0"/>
-                    <iconPacks:PackIconMaterial 
+                    <materialDesign:PackIcon 
                         Kind="TextboxPassword"
                         VerticalAlignment="Center" HorizontalAlignment="Center" 
                         Foreground="White" />

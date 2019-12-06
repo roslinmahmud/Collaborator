@@ -34,7 +34,6 @@ namespace Collaborator
             backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             backgroundWorker.RunWorkerAsync();
 
-           
         }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -69,14 +68,6 @@ namespace Collaborator
                 mainWindow = value;
             }
         }
-      
-        private void Logout_Click(object sender, RoutedEventArgs e)
-        {
-            User.Instance.UnSave();
-            mainWindow.Show();
-            server.StopServer();
-            this.Close();
-        }
 
         private void ContactList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -85,5 +76,27 @@ namespace Collaborator
             ChatMessage.ItemsSource = user.messages;
         }
 
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            User.Instance.UnSave();
+            mainWindow.Show();
+            server.StopServer();
+            this.Close();
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void CloseIcon_MouseEnter(object sender, MouseEventArgs e)
+        {
+            CloseIcon.Foreground = Brushes.Red;
+        }
+
+        private void CloseIcon_MouseLeave(object sender, MouseEventArgs e)
+        {
+            CloseIcon.Foreground = Brushes.White;
+        }
     }
 }

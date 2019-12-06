@@ -17,12 +17,27 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel
+        <Grid
             x:Name="TopPanel"
-            Orientation="Horizontal" VerticalAlignment="Top" Background="DarkCyan" Height="40" Grid.ColumnSpan="2"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Top"
+            Background="DarkCyan" Height="40"
             MouseDown="TopPanel_MouseDown">
-
-        </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button
+                    x:Name="CloseButton"
+                    Background="Transparent" BorderBrush="Transparent"
+                    Click="CloseButton_Click">
+                    <materialDesign:PackIcon
+                        Name="CloseIcon"
+                        Kind="Close" 
+                        Width="25" Height="25"
+                        Background="Transparent" Foreground="White"
+                        MouseEnter="CloseIcon_MouseEnter"
+                        MouseLeave="CloseIcon_MouseLeave"/>
+                </Button>
+            </StackPanel>
+        </Grid>
 
         <Grid Grid.Column="0" Grid.Row="1" Background="White">
             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
