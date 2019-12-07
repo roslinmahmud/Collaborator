@@ -21,23 +21,29 @@ namespace Collaborator
         BackgroundWorker worker = null;
         ScrollViewer scrollViewer = null;
         public Server()
+        {    
+        }
+        public Server(ScrollViewer scrollViewer)
         {
             iPAddress = IPAddress.Parse(Connection.HostIP);
             server = new TcpListener(iPAddress, 11998);
 
             message = new StringBuilder();
             worker = new BackgroundWorker();
-        }
-        public async void StartServer(ScrollViewer scrollViewer)
-        {
-            this.scrollViewer = scrollViewer;
-            server.Start();
-            
-            worker.DoWork += Worker_DoWork;
-            worker.ProgressChanged += Worker_ProgressChanged;
-            worker.WorkerReportsProgress = true;
-            worker.RunWorkerAsync();
 
+            this.scrollViewer = scrollViewer;
+        }
+        public void StartServer()
+        {
+            server.Start();
+
+            AcceptClient();
+   
+            ReadMessages();
+        }
+
+        private async void AcceptClient()
+        {
             while (true)
             {
                 try
@@ -45,11 +51,19 @@ namespace Collaborator
                     client = await server.AcceptTcpClientAsync();
                     AssignClient(client.Client.RemoteEndPoint.ToString().Split(':')[0]);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     break;
                 }
             }
+        }
+
+        private void ReadMessages()
+        {
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.WorkerReportsProgress = true;
+            worker.RunWorkerAsync();
         }
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)

@@ -70,11 +70,11 @@
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon 
                             Kind="Logout" 
-                            Width="25" Height="25"
+                            Width="20" Height="20"
                             Background="Transparent" Foreground="Black"/>
                     <TextBlock
                             Foreground="Black"
-                            FontFamily="Helvetica" FontWeight="DemiBold" FontSize="20">
+                            FontFamily="Helvetica" FontWeight="DemiBold" FontSize="15">
                             Logout
                     </TextBlock>
                 </StackPanel>
@@ -86,7 +86,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Grid>
+            <Grid Grid.Row="0">
                 <StackPanel Orientation="Horizontal" Height="50" Background="AliceBlue" VerticalAlignment="Top">
                     <StackPanel.Effect>
                         <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.1"/>
@@ -123,6 +123,25 @@
             </Grid>
             <Grid Grid.Row="2">
                 <!-- Bottom Design -->
+                <StackPanel Orientation="Horizontal">
+                    <TextBox
+                        x:Name="MessageTextBox"
+                        materialDesign:HintAssist.Hint="Write a message..."
+                        Width="500" Height="40"
+                        Background="White"
+                        FontFamily="Helvetica" FontWeight="Regular" FontSize="15"
+                        AcceptsReturn="True" TextWrapping="Wrap"
+                        TextChanged="MessageTextBox_TextChanged"/>
+                    <Button
+                        x:Name="SendButton" IsEnabled="False"
+                        Background="Transparent"  BorderThickness="0">
+                        <materialDesign:PackIcon 
+                            Kind="Send"
+                            Foreground="DeepSkyBlue"
+                            Width="25" Height="25"/>
+                    </Button>
+                </StackPanel>
+                
             </Grid>
         </Grid>
     </Grid>

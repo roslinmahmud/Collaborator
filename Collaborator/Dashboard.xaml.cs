@@ -39,8 +39,8 @@ namespace Collaborator
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             ContactList.ItemsSource = users;
-            server = new Server();
-            server.StartServer(ChatMessageScroll);
+            server = new Server(ChatMessageScroll);
+            server.StartServer();
         }
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -97,6 +97,19 @@ namespace Collaborator
         private void CloseIcon_MouseLeave(object sender, MouseEventArgs e)
         {
             CloseIcon.Foreground = Brushes.White;
+        }
+
+        private void MessageTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox MessageTextBox = sender as TextBox;
+            if(MessageTextBox.Text.Length > 0 && !SendButton.IsEnabled)
+            {
+                SendButton.IsEnabled = true;
+            }
+            else if (MessageTextBox.Text.Length == 0 && SendButton.IsEnabled)
+            {
+                SendButton.IsEnabled = false;
+            }
         }
     }
 }
