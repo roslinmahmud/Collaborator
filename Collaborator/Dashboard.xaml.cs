@@ -32,6 +32,12 @@ namespace Collaborator
         {
             InitializeComponent();
 
+            Init();
+
+        }
+        
+        private void Init()
+        {
             backgroundWorker.DoWork += BackgroundWorker_DoWork;
             backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             backgroundWorker.RunWorkerAsync();
