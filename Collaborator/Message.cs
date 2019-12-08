@@ -9,5 +9,7 @@ namespace Collaborator
     class Message
     {
         public string Text { set; get; }
+        public string Align { set; get; }
+
     }
 }

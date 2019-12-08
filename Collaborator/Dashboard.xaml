@@ -80,6 +80,7 @@
                 </StackPanel>
             </Button>
         </Grid>
+        
         <Grid Grid.Column="1" Grid.Row="1" Background="AliceBlue">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -105,7 +106,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <Border Background="LightGray" CornerRadius="10 10 10 10" Margin="10 10" Width="300" HorizontalAlignment="Left">
+                                    <Border Background="LightGray" CornerRadius="10 10 10 10" Margin="10 10" Width="300" HorizontalAlignment="{Binding Align}">
                                         <TextBlock
                                             TextWrapping="Wrap"
                                             Margin="15"
@@ -121,6 +122,7 @@
                     </ItemsControl>
                 </ScrollViewer>
             </Grid>
+            
             <Grid Grid.Row="2">
                 <!-- Bottom Design -->
                 <StackPanel Orientation="Horizontal">
@@ -134,7 +136,8 @@
                         TextChanged="MessageTextBox_TextChanged"/>
                     <Button
                         x:Name="SendButton" IsEnabled="False"
-                        Background="Transparent"  BorderThickness="0">
+                        Background="Transparent"  BorderThickness="0"
+                        Click="SendButton_Click">
                         <materialDesign:PackIcon 
                             Kind="Send"
                             Foreground="DeepSkyBlue"

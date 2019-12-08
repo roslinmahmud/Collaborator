@@ -16,7 +16,6 @@ namespace Collaborator
         internal ObservableCollection<Message> messages = new ObservableCollection<Message>();
         private User()
         {
-
         }
         private User(int id, string username, string name, string photo_path, string ip)
         {
@@ -31,16 +30,11 @@ namespace Collaborator
         public string Name { set; get; }
         public string Photo_Path { set; get; }
         public string Ip { set; get; }
+        public bool Alive { set; get; }
         public TcpClient Client
         {
-            get
-            {
-                return client;
-            }
-            set
-            {
-                client = value;
-            }
+            get{ return client; }
+            set{ client = value; }
         }
         public static User Instance
         {

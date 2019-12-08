@@ -26,6 +26,8 @@ namespace Collaborator
         internal List<User> users;
         private BackgroundWorker backgroundWorker = new BackgroundWorker();
         Server server = null;
+        Client client = null;
+        User user = null;
         public Dashboard()
         {
             InitializeComponent();
@@ -39,6 +41,8 @@ namespace Collaborator
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             ContactList.ItemsSource = users;
+            client = new Client();
+            client.CheckStatus();
             server = new Server(ChatMessageScroll);
             server.StartServer();
         }
@@ -63,17 +67,15 @@ namespace Collaborator
         public string FullName { get; set; }
         public MainWindow MainWindowInstance
         {
-            set
-            {
-                mainWindow = value;
-            }
+            set{ mainWindow = value; }
         }
 
         private void ContactList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            User user = ContactList.SelectedItem as User;
+            user = ContactList.SelectedItem as User;
             HeaderTextBlock.Text = user.Name;
             ChatMessage.ItemsSource = user.messages;
+            client.Connect(user.Ip, user.Alive);
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -110,6 +112,13 @@ namespace Collaborator
             {
                 SendButton.IsEnabled = false;
             }
+        }
+
+        private void SendButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            client.SendMessage(MessageTextBox.Text);
+            user.messages.Add(new Message() { Text = MessageTextBox.Text, Align = "Right" });
         }
     }
 }

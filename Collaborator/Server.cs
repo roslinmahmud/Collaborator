@@ -39,7 +39,7 @@ namespace Collaborator
 
             AcceptClient();
    
-            ReadMessages();
+            ReceiveMessages();
         }
 
         private async void AcceptClient()
@@ -58,7 +58,7 @@ namespace Collaborator
             }
         }
 
-        private void ReadMessages()
+        private void ReceiveMessages()
         {
             worker.DoWork += Worker_DoWork;
             worker.ProgressChanged += Worker_ProgressChanged;
@@ -68,7 +68,7 @@ namespace Collaborator
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            User.Instance.ContactList[e.ProgressPercentage].messages.Add(new Message() { Text = message.ToString() });
+            User.Instance.ContactList[e.ProgressPercentage].messages.Add(new Message() { Text = message.ToString(), Align="Left"});
             scrollViewer.ScrollToBottom();
             message.Clear();
         }
