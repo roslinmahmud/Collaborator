@@ -21,40 +21,12 @@ namespace Collaborator
             ping = new Ping();
             client = User.Instance.Client;
         }
-        public void Connect(string IP, bool status)
-        {
-            try
-            {
-                if (status)
-                {
-                    if (User.Instance.Client != null)
-                    {
-                        if (User.Instance.Client.Client.RemoteEndPoint.ToString().Split(':')[0] != IP)
-                        {
-                            User.Instance.Client.Close();
-                            User.Instance.Client = new TcpClient(IP, 11998);
-                            MessageBox.Show(User.Instance.Client.Client.RemoteEndPoint.ToString().Split(':')[0]);
-                        }
-                    }
-                    else
-                    {
-                        User.Instance.Client = new TcpClient(IP, 11998);
-                        MessageBox.Show(User.Instance.Client.Client.RemoteEndPoint.ToString().Split(':')[0]);
-                    }
-                }
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            
-        }
         
-        public void SendMessage(string message)
+        public void SendMessage(string message, TcpClient client)
         {
             Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
 
-            NetworkStream stream = User.Instance.Client.GetStream();
+            NetworkStream stream = client.GetStream();
 
             stream.Write(data, 0, data.Length);
         }
@@ -63,7 +35,7 @@ namespace Collaborator
         {
             worker.CancelAsync();
         }
-        public void CheckStatus()
+        public void StartClient()
         {
             worker = new BackgroundWorker();
             worker.DoWork += Worker_DoWork;
@@ -76,6 +48,7 @@ namespace Collaborator
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             List<User> contacts = User.Instance.ContactList;
+            IPAddress iP;
             while (true)
             {
                 if (worker.CancellationPending)
@@ -85,19 +58,42 @@ namespace Collaborator
                 }
                 for (int i = 0; i < contacts.Count; i++)
                 {
-                    IPAddress iP = IPAddress.Parse(contacts[i].Ip);
+                    iP = IPAddress.Parse(contacts[i].Ip);
                     if (ping.Send(iP).Status == IPStatus.Success)
                     {
                         contacts[i].Alive = true;
+                        if (contacts[i].Client == null)
+                        {
+                            Connect(i);
+                        }
                     }
                     else
                     {
                         contacts[i].Alive = false;
+                        if (contacts[i].Client != null)
+                        {
+                            contacts[i].Client = null;
+                        }
                     }
                 }
                 Thread.Sleep(100);
             }
             
+        }
+
+        private void Connect(int ind)
+        {
+            try
+            {
+                User.Instance.ContactList[ind].Client = new TcpClient(User.Instance.ContactList[ind].Ip, 11998);
+
+                MessageBox.Show(User.Instance.ContactList[ind].Client.Client.RemoteEndPoint.ToString().Split(':')[0]);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
         }
     }
 }

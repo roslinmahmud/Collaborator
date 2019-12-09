@@ -48,7 +48,7 @@ namespace Collaborator
         {
             ContactList.ItemsSource = users;
             client = new Client();
-            client.CheckStatus();
+            client.StartClient();
             server = new Server(ChatMessageScroll);
             server.StartServer();
         }
@@ -81,7 +81,6 @@ namespace Collaborator
             user = ContactList.SelectedItem as User;
             HeaderTextBlock.Text = user.Name;
             ChatMessage.ItemsSource = user.messages;
-            client.Connect(user.Ip, user.Alive);
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -124,9 +123,9 @@ namespace Collaborator
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
 
-            if (user.Alive)
+            if (user.Alive && user.Client != null)
             {
-                client.SendMessage(MessageTextBox.Text);
+                client.SendMessage(MessageTextBox.Text, user.Client);
                 user.messages.Add(new Message() { Text = MessageTextBox.Text, Align = "Right" });
                 MessageTextBox.Text = String.Empty;
             }
