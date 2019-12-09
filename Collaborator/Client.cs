@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -36,7 +35,6 @@ namespace Collaborator
                             User.Instance.Client = new TcpClient(IP, 11998);
                             MessageBox.Show(User.Instance.Client.Client.RemoteEndPoint.ToString().Split(':')[0]);
                         }
-
                     }
                     else
                     {
@@ -51,6 +49,7 @@ namespace Collaborator
             }
             
         }
+        
         public void SendMessage(string message)
         {
             Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
@@ -59,10 +58,16 @@ namespace Collaborator
 
             stream.Write(data, 0, data.Length);
         }
+
+        public void StopClient()
+        {
+            worker.CancelAsync();
+        }
         public void CheckStatus()
         {
             worker = new BackgroundWorker();
             worker.DoWork += Worker_DoWork;
+            worker.WorkerSupportsCancellation = true;
             worker.RunWorkerAsync();
 
             
@@ -70,21 +75,27 @@ namespace Collaborator
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            List<User> contacts = User.Instance.ContactList;
             while (true)
             {
-                for (int i = 0; i < User.Instance.ContactList.Count; i++)
+                if (worker.CancellationPending)
                 {
-                    IPAddress iP = IPAddress.Parse(User.Instance.ContactList[i].Ip);
+                    contacts.Clear();
+                    break;
+                }
+                for (int i = 0; i < contacts.Count; i++)
+                {
+                    IPAddress iP = IPAddress.Parse(contacts[i].Ip);
                     if (ping.Send(iP).Status == IPStatus.Success)
                     {
-                        User.Instance.ContactList[i].Alive = true;
+                        contacts[i].Alive = true;
                     }
                     else
                     {
-                        User.Instance.ContactList[i].Alive = false;
+                        contacts[i].Alive = false;
                     }
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
             }
             
         }

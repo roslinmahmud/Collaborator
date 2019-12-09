@@ -86,8 +86,9 @@ namespace Collaborator
 
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
-            User.Instance.UnSave();
+            User.Instance.Reset();
             mainWindow.Show();
+            client.StopClient();
             server.StopServer();
             this.Close();
         }
@@ -122,9 +123,19 @@ namespace Collaborator
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            client.SendMessage(MessageTextBox.Text);
-            user.messages.Add(new Message() { Text = MessageTextBox.Text, Align = "Right" });
+
+            if (user.Alive)
+            {
+                client.SendMessage(MessageTextBox.Text);
+                user.messages.Add(new Message() { Text = MessageTextBox.Text, Align = "Right" });
+                MessageTextBox.Text = String.Empty;
+            }
+            else
+            {
+                user.messages.Add(new Message() { Text = "Message failed! "+ user.Name + " is Offline...", Align = "Right" });
+                MessageTextBox.Text = String.Empty;
+            }
+                
         }
     }
 }

@@ -78,9 +78,11 @@ namespace Collaborator
                 }
                 return contactlist;
             }
+            set { contactlist = value; }
         }
         public void Init(MySqlDataReader dataReader)
         {
+            //MessageBox.Show(dataReader.GetString(1));
             Id = dataReader.GetInt32(0);
             UserName = dataReader.GetString(1);
             Name = dataReader.GetString(2);
@@ -89,6 +91,7 @@ namespace Collaborator
         }
         public void Init()
         {
+            // MessageBox.Show("main user init " + Properties.Settings.Default.UserName);
             string query = "SELECT id, username, name, photo_path, ip FROM USER WHERE USERNAME='" + Properties.Settings.Default.UserName + "';";
             try
             {
@@ -107,16 +110,20 @@ namespace Collaborator
             }
             
         }
+        public void Reset()
+        {
+            UnSave();
+            user = null;
+        }
         public void Save()
         {
             Properties.Settings.Default.UserName = UserName;
             Properties.Settings.Default.Save();
         }
-        public void UnSave()
+        private void UnSave()
         {
             Properties.Settings.Default.UserName = string.Empty;
             Properties.Settings.Default.Save();
-            contactlist.Clear();
         }
         public bool Saved()
         {
