@@ -131,7 +131,7 @@ namespace Collaborator
             }
             else
             {
-                user.messages.Add(new Message() { Text = "Message failed! "+ user.Name + " is Offline...", Align = "Right", DateTime = DateTime.Now.ToString("HH:mm ddd"), Color = "LightBlue" });
+                user.messages.Add(new Message() { Text = "Message failed! "+ user.Name + " is Offline...", Align = "Right", DateTime = DateTime.Now.ToString("hh:mm tt ddd"), Color = "LightBlue" });
                 MessageTextBox.Text = String.Empty;
             }
                 
