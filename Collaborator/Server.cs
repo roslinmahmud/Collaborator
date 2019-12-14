@@ -105,7 +105,7 @@ namespace Collaborator
                 if (users[i].Ip.Equals(IP))
                 {
                     users[i].Client = this.client;
-                    MessageBox.Show("Assigned to "+ users[i].Name);
+                    //MessageBox.Show("Assigned to "+ users[i].Name);
                 }
             }
         }

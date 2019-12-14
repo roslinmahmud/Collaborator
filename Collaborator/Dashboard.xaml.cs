@@ -81,6 +81,7 @@ namespace Collaborator
             user = ContactList.SelectedItem as User;
             HeaderTextBlock.Text = user.Name;
             ChatMessage.ItemsSource = user.messages;
+            
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)

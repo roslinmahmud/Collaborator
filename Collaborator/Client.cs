@@ -83,6 +83,7 @@ namespace Collaborator
                         }
                     }
                 }
+                Thread.Sleep(10000);
             }
             
         }
@@ -93,13 +94,13 @@ namespace Collaborator
             {
                 User.Instance.ContactList[ind].Client = new TcpClient(User.Instance.ContactList[ind].Ip, 11998);
 
-                MessageBox.Show(User.Instance.ContactList[ind].Name + " Connected");
+                //MessageBox.Show(User.Instance.ContactList[ind].Name + " Connected");
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, this.ToString() + " Connect() Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
+
     }
 }
