@@ -24,11 +24,18 @@ namespace Collaborator
         
         public void SendMessage(string message, TcpClient client)
         {
-            Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
+            try
+            {
+                Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
 
-            NetworkStream stream = client.GetStream();
+                NetworkStream stream = client.GetStream();
 
-            stream.Write(data, 0, data.Length);
+                stream.Write(data, 0, data.Length);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message, this.ToString() + " SendMessage() Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public void StopClient()
@@ -42,7 +49,7 @@ namespace Collaborator
             worker.WorkerSupportsCancellation = true;
             worker.RunWorkerAsync();
 
-            
+
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -87,11 +94,11 @@ namespace Collaborator
             {
                 User.Instance.ContactList[ind].Client = new TcpClient(User.Instance.ContactList[ind].Ip, 11998);
 
-                MessageBox.Show(User.Instance.ContactList[ind].Client.Client.RemoteEndPoint.ToString().Split(':')[0]);
+                MessageBox.Show(User.Instance.ContactList[ind].Name + " Connected");
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, this.ToString() + " Connect() Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }

@@ -106,13 +106,20 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <Border Background="LightGray" CornerRadius="10 10 10 10" Margin="10 10" Width="300" HorizontalAlignment="{Binding Align}">
-                                        <TextBlock
-                                            TextWrapping="Wrap"
-                                            Margin="15"
-                                            FontFamily="Helvetica" FontWeight="Regular" FontSize="12"
-                                            Foreground="Black"
-                                            Text="{Binding Text}"/>
+                                    <Border Background="{Binding Color}" CornerRadius="10 10 10 10" Margin="10 10" Width="300" HorizontalAlignment="{Binding Align}">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock
+                                                TextWrapping="Wrap"
+                                                Margin="10 10 10 0"
+                                                FontFamily="Helvetica" FontWeight="Regular" FontSize="12"
+                                                Foreground="Black"
+                                                Text="{Binding Text}"/>
+                                            <TextBlock
+                                                HorizontalAlignment="Right" Margin="0 0 5 5"
+                                                FontFamily="Helvetica" FontWeight="Regular" FontSize="8"
+                                                Foreground="Black"
+                                                Text="{Binding DateTime}"/>
+                                        </StackPanel>
                                     </Border>
 
                                 </Grid>

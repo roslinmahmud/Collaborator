@@ -68,7 +68,7 @@ namespace Collaborator
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            User.Instance.ContactList[e.ProgressPercentage].messages.Add(new Message() { Text = message.ToString(), Align="Left"});
+            User.Instance.ContactList[e.ProgressPercentage].messages.Add(new Message() { Text = message.ToString(), Align="Left", DateTime = DateTime.Now.ToString("HH:mm ddd"), Color = "LightGray" });
             scrollViewer.ScrollToBottom();
             message.Clear();
         }

@@ -10,6 +10,8 @@ namespace Collaborator
     {
         public string Text { set; get; }
         public string Align { set; get; }
+        public string DateTime { set; get; }
+        public string Color { set; get; }
 
     }
 }

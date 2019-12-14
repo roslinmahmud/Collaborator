@@ -126,12 +126,12 @@ namespace Collaborator
             if (user.Alive && user.Client != null)
             {
                 client.SendMessage(MessageTextBox.Text, user.Client);
-                user.messages.Add(new Message() { Text = MessageTextBox.Text, Align = "Right" });
+                user.messages.Add(new Message() { Text = MessageTextBox.Text, Align = "Right", DateTime=DateTime.Now.ToString("hh:mm tt ddd"), Color="LightBlue"});
                 MessageTextBox.Text = String.Empty;
             }
             else
             {
-                user.messages.Add(new Message() { Text = "Message failed! "+ user.Name + " is Offline...", Align = "Right" });
+                user.messages.Add(new Message() { Text = "Message failed! "+ user.Name + " is Offline...", Align = "Right", DateTime = DateTime.Now.ToString("HH:mm ddd"), Color = "LightBlue" });
                 MessageTextBox.Text = String.Empty;
             }
                 
