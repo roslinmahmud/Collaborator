@@ -83,7 +83,6 @@ namespace Collaborator
                         }
                     }
                 }
-                Thread.Sleep(100);
             }
             
         }
