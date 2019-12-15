@@ -13,13 +13,10 @@ namespace Collaborator
 {
     class Client
     {
-        TcpClient client = null;
         Ping ping = null;
         BackgroundWorker worker = null;
         public Client()
         {
-            ping = new Ping();
-            client = User.Instance.Client;
         }
         
         public void SendMessage(string message, TcpClient client)
@@ -37,11 +34,6 @@ namespace Collaborator
                 MessageBox.Show(e.Message, this.ToString() + " SendMessage() Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-        public void StopClient()
-        {
-            worker.CancelAsync();
-        }
         public void StartClient()
         {
             worker = new BackgroundWorker();
@@ -51,10 +43,15 @@ namespace Collaborator
 
 
         }
+        public void StopClient()
+        {
+            worker.CancelAsync();
+        }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             List<User> contacts = User.Instance.ContactList;
+            ping = new Ping();
             IPAddress iP;
             while (true)
             {
@@ -71,7 +68,7 @@ namespace Collaborator
                         if (contacts[i].Client == null)
                         {
                             contacts[i].Alive = true;
-                            Connect(i);
+                            contacts[i].Client = GetClient(contacts[i]);
                         }
                     }
                     else
@@ -88,17 +85,18 @@ namespace Collaborator
             
         }
 
-        private void Connect(int ind)
+        private TcpClient GetClient(User user)
         {
             try
             {
-                User.Instance.ContactList[ind].Client = new TcpClient(User.Instance.ContactList[ind].Ip, 11998);
-
-                //MessageBox.Show(User.Instance.ContactList[ind].Name + " Connected");
+                return new TcpClient(user.Ip, 11998);
+                //MessageBox.Show(user.Name + " Connected");
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, this.ToString() + " Connect() Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                //MessageBox.Show(e.Message, this.ToString() + " GetClient() Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                user.Alive = false;
+                return null;
             }
         }
 
