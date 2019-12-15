@@ -40,8 +40,6 @@ namespace Collaborator
             worker.DoWork += Worker_DoWork;
             worker.WorkerSupportsCancellation = true;
             worker.RunWorkerAsync();
-
-
         }
         public void StopClient()
         {
