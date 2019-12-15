@@ -85,10 +85,13 @@ namespace Collaborator
                     byte[] bytes = new byte[1024];
                     NetworkStream stream = users[i].Client.GetStream();
                     int sz;
-                    if (users[i].Client.Available != 0)
+                    while (users[i].Client.Available != 0)
                     {
                         sz = stream.Read(bytes, 0, bytes.Length);
                         message.Append(Encoding.ASCII.GetString(bytes, 0, sz));
+                    }
+                    if(message.Length > 0) 
+                    {
                         worker.ReportProgress(i);
                     }
 
