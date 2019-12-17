@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Common;
 using System.Linq;
 using System.Net.Sockets;
 using System.Windows;
@@ -79,6 +80,33 @@ namespace Collaborator
                 return contactlist;
             }
             set { contactlist = value; }
+        }
+        public void SyncMessage()
+        {
+            string query = "SELECT MESSAGE_DATA, DATE_TIME, SENDER_ID FROM MESSAGE WHERE RECEIVER_ID='"+Id+"' OR SENDER_ID='"+Id+"';";
+            try
+            {
+                using (MySqlCommand mySqlCommand = new MySqlCommand(query, DBConnection.Instance.Connection))
+                {
+                    DbDataReader dataReader = mySqlCommand.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        string dateTime = DateTime.Parse(dataReader.GetString(1)).ToString("hh:mm tt ddd");
+                        if (dataReader.GetString(2) == Id.ToString())
+                        {
+                            messages.Add(new Message() { Text = dataReader.GetString(0), Align="Left", DateTime = dateTime, Color = "LightGray" });
+                        }
+                        else
+                        {
+                            messages.Add(new Message() { Text = dataReader.GetString(0), Align = "Right", DateTime = dateTime, Color = "LightBlue" });
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, this.ToString() + " ContactList Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         public void Init(MySqlDataReader dataReader)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -32,6 +33,22 @@ namespace Collaborator
             catch(Exception e)
             {
                 MessageBox.Show(e.Message, this.ToString() + " SendMessage() Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        public async void StoreMessage(string message, string receiverID)
+        {
+            string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string query = "INSERT INTO MESSAGE (SENDER_ID, RECEIVER_ID, MESSAGE_DATA, DATE_TIME) VALUES ('" + User.Instance.Id+"','"+receiverID+"','"+message+"','"+date+"');";
+            try
+            {
+                using (MySqlCommand mySqlCommand = new MySqlCommand(query, DBConnection.Instance.Connection))
+                {
+                    await mySqlCommand.ExecuteNonQueryAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, this.ToString() + " StoreMessage Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         public void StartClient()

@@ -38,10 +38,15 @@ namespace Collaborator
             server.Start();
 
             AcceptClient();
+
+            RetrieveMessage();
    
             ReceiveMessages();
         }
-
+        public void StopServer()
+        {
+            server.Stop();
+        }
         private async void AcceptClient()
         {
             while (true)
@@ -57,7 +62,14 @@ namespace Collaborator
                 }
             }
         }
-
+        private void RetrieveMessage()
+        {
+            List<User> users = User.Instance.ContactList;
+            foreach(User user in users)
+            {
+                user.SyncMessage();
+            }
+        }
         private void ReceiveMessages()
         {
             worker.DoWork += Worker_DoWork;
@@ -100,7 +112,7 @@ namespace Collaborator
             }
         }
 
-        public void AssignClient(string IP)
+        private void AssignClient(string IP)
         {
             List<User> users = new List<User>(User.Instance.ContactList);
             for(int i = 0; i < users.Count; i++)
@@ -111,10 +123,6 @@ namespace Collaborator
                     //MessageBox.Show("Assigned to "+ users[i].Name);
                 }
             }
-        }
-        public void StopServer()
-        {
-            server.Stop();
         }
     }
 }

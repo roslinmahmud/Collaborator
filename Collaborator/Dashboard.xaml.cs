@@ -47,16 +47,21 @@ namespace Collaborator
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             ContactList.ItemsSource = users;
-            client = new Client();
-            client.StartClient();
+
             server = new Server(ChatMessageScroll);
             server.StartServer();
+
+            client = new Client();
+            client.StartClient();
+
         }
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             User.Instance.Init();
             users = User.Instance.ContactList;
+
+            // Checking whether the IP of current user has changed or not!
             if (!User.Instance.CheckIP())
             {
                 User.Instance.UpdateIP();
@@ -128,13 +133,16 @@ namespace Collaborator
             {
                 client.SendMessage(MessageTextBox.Text, user.Client);
                 user.messages.Add(new Message() { Text = MessageTextBox.Text, Align = "Right", DateTime=DateTime.Now.ToString("hh:mm tt ddd"), Color="LightBlue"});
-                MessageTextBox.Text = String.Empty;
+                
             }
             else
             {
-                user.messages.Add(new Message() { Text = "Message failed! "+ user.Name + " is Offline...", Align = "Right", DateTime = DateTime.Now.ToString("hh:mm tt ddd"), Color = "LightBlue" });
+                user.messages.Add(new Message() { Text = MessageTextBox.Text, Align = "Right", DateTime = DateTime.Now.ToString("hh:mm tt ddd"), Color = "LightBlue" });
+                //user.messages.Add(new Message() { Text = "Message failed! "+ user.Name + " is Offline...", Align = "Right", DateTime = DateTime.Now.ToString("hh:mm tt ddd"), Color = "LightBlue" });
             }
-                
+            client.StoreMessage(MessageTextBox.Text, user.Id.ToString());
+            MessageTextBox.Text = String.Empty;
+
         }
     }
 }
