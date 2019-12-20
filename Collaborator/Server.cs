@@ -20,6 +20,8 @@ namespace Collaborator
         StringBuilder message = null;
         BackgroundWorker worker = null;
         ScrollViewer scrollViewer = null;
+        List<User> users = null;
+        Dictionary<string, int> index = null;
         public Server()
         {    
         }
@@ -37,6 +39,8 @@ namespace Collaborator
         {
             server.Start();
 
+            PairUserIP();
+
             AcceptClient();
 
             RetrieveMessage();
@@ -46,6 +50,17 @@ namespace Collaborator
         public void StopServer()
         {
             server.Stop();
+        }
+        private void PairUserIP()
+        {
+            users = User.Instance.ContactList;
+            index = new Dictionary<string, int>();
+
+            for (int i = 0; i < users.Count; i++)
+            {
+                //Creating <userIP, index> pairs
+                index[users[i].Ip] = i;
+            }
         }
         private async void AcceptClient()
         {
@@ -64,10 +79,10 @@ namespace Collaborator
         }
         private void RetrieveMessage()
         {
-            List<User> users = User.Instance.ContactList;
-            foreach(User user in users)
+            for (int i=0;i<users.Count;i++)
             {
-                user.SyncMessage();
+                //Syncing users previous messages
+                users[i].SyncMessage();
             }
         }
         private void ReceiveMessages()
@@ -114,15 +129,9 @@ namespace Collaborator
 
         private void AssignClient(string IP)
         {
-            List<User> users = new List<User>(User.Instance.ContactList);
-            for(int i = 0; i < users.Count; i++)
-            {
-                if (users[i].Ip.Equals(IP))
-                {
-                    users[i].Client = this.client;
-                    //MessageBox.Show("Assigned to "+ users[i].Name);
-                }
-            }
+            users[index[IP]].Client = client;
+            users[index[IP]].Alive = true;
+            //MessageBox.Show("Assigned to "+ users[i].Name);
         }
     }
 }
