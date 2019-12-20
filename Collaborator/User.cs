@@ -83,7 +83,7 @@ namespace Collaborator
         }
         public void SyncMessage()
         {
-            string query = "SELECT MESSAGE_DATA, DATE_TIME, SENDER_ID FROM MESSAGE WHERE RECEIVER_ID='"+Id+"' OR SENDER_ID='"+Id+"';";
+            string query = "SELECT MESSAGE_DATA, DATE_TIME, SENDER_ID FROM MESSAGE WHERE (RECEIVER_ID='"+User.Instance.Id+"' AND SENDER_ID='"+Id+ "') OR (RECEIVER_ID='" + Id + "' AND SENDER_ID='" + User.Instance.Id + "');";
             try
             {
                 using (MySqlCommand mySqlCommand = new MySqlCommand(query, DBConnection.Instance.Connection))
