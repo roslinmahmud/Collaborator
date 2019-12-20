@@ -80,17 +80,17 @@ namespace Collaborator
                     iP = IPAddress.Parse(contacts[i].Ip);
                     if (ping.Send(iP).Status == IPStatus.Success)
                     {
+                        contacts[i].Alive = true;
                         if (contacts[i].Client == null)
                         {
-                            contacts[i].Alive = true;
                             contacts[i].Client = GetClient(contacts[i]);
                         }
                     }
                     else
                     {
+                        contacts[i].Alive = false;
                         if (contacts[i].Client != null)
                         {
-                            contacts[i].Alive = false;
                             contacts[i].Client = null;
                         }
                     }
@@ -110,7 +110,6 @@ namespace Collaborator
             catch (Exception e)
             {
                 //MessageBox.Show(e.Message, this.ToString() + " GetClient() Exception", MessageBoxButton.OK, MessageBoxImage.Error);
-                user.Alive = false;
                 return null;
             }
         }
