@@ -104,8 +104,8 @@ namespace Collaborator
         {
             try
             {
-                return new TcpClient(user.Ip, 11998);
                 //MessageBox.Show(user.Name + " Connected");
+                return new TcpClient(user.Ip, 11998);
             }
             catch (Exception e)
             {

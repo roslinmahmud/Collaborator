@@ -86,7 +86,9 @@ namespace Collaborator
             user = ContactList.SelectedItem as User;
             HeaderTextBlock.Text = user.Name;
             ChatMessage.ItemsSource = user.messages;
-            
+            ChatMessageScroll.ScrollToBottom();
+
+
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -142,6 +144,7 @@ namespace Collaborator
             }
             client.StoreMessage(MessageTextBox.Text, user.Id.ToString());
             MessageTextBox.Text = String.Empty;
+            ChatMessageScroll.ScrollToBottom();
 
         }
     }
