@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace Collaborator
 {
@@ -19,6 +20,9 @@ namespace Collaborator
     /// </summary>
     public partial class Profile : Window
     {
+        public string username;
+        public string fullname;
+
         public Profile()
         {
             InitializeComponent();
@@ -48,5 +52,79 @@ namespace Collaborator
             SubmitButton.Background = new SolidColorBrush(new_color);
             SubmitButton.Foreground = new SolidColorBrush(Colors.White);
         }
+
+        private void Submit_Button_Clicked(object sender, RoutedEventArgs e)
+        {
+            String New_Username = UserName.Text;
+            String New_Fullname = Name.Text;
+            if (New_Username==""||New_Fullname=="")
+            {
+                Update_Message.Text = "Username field or full name field can't be empty!";
+                Update_Message.Foreground = new SolidColorBrush(Colors.Red);
+            }
+            else if (New_Username!=username)
+            {
+                Update_Username(New_Username);
+            }
+            if (New_Fullname!=fullname)
+            {
+                Update_Fullname(New_Fullname);
+            }
+            
+            
+            
+
+        }
+        public void Update_Fullname(String New_Fullname)
+        {
+            DBConnection.Instance.Connect();
+            
+            String query = "UPDATE USER SET ='" + New_Fullname + "' WHERE username='" + username + "';";
+            try
+            {
+                using (MySqlCommand mySqlCommand = new MySqlCommand(query, DBConnection.Instance.Connection))
+                {
+                    mySqlCommand.ExecuteNonQuery();
+                    Update_Message.Text = "Successfully Updated!";
+                    Update_Message.Foreground = new SolidColorBrush(Colors.Green);
+
+
+                }
+            }
+            catch (Exception e)
+            {
+                DBConnection.Instance.Connection = null;
+                MessageBox.Show(e.Message, this.ToString() + " Perform() Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+
+
+        }
+        public void Update_Username(String New_Username)
+        {
+            DBConnection.Instance.Connect();
+
+            String query = "UPDATE USER SET username='" + New_Username + "' WHERE username='" + username + "';";
+            try
+            {
+                using (MySqlCommand mySqlCommand = new MySqlCommand(query, DBConnection.Instance.Connection))
+                {
+                    mySqlCommand.ExecuteNonQuery();
+                    Update_Message.Text = "Successfully Updated!";
+                    Update_Message.Foreground = new SolidColorBrush(Colors.Green);
+
+
+                }
+            }
+            catch (Exception e)
+            {
+                DBConnection.Instance.Connection = null;
+                MessageBox.Show(e.Message, this.ToString() + " Perform() Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+
+
+        }
+       
     }
 }

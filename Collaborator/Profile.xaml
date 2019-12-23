@@ -73,6 +73,10 @@
 
             </Grid>
 
+            <TextBlock x:Name="Update_Message"
+                       Margin="10 10 0 0"
+                       Padding="4"></TextBlock>
+
 
             <Button
                     x:Name="SubmitButton"
@@ -84,7 +88,10 @@
                     FontSize="15"
                     FontFamily="Helvetica" 
                     FontWeight="Light" 
-                    Content="Submit" MouseEnter="Submit_Button_Entered" MouseLeave="Submit_Button_Left" />
+                    Content="Submit"
+                    MouseEnter="Submit_Button_Entered" 
+                    MouseLeave="Submit_Button_Left" Click="Submit_Button_Clicked" 
+                     />
 
 
 
