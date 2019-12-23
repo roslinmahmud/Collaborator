@@ -1,0 +1,96 @@
+﻿<Window x:Class="Collaborator.Profile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Collaborator"
+        mc:Ignorable="d"
+       Title="Profile" Height="600" Width="800">
+    <Border   Padding="100">
+        <StackPanel Orientation="Vertical" 
+                    RenderTransformOrigin="0.5,0.5"
+                    Margin="20 0 0 0">
+
+
+            <!-- Profile Picture-->
+
+            <Image Name="ProfilePicture"
+                   HorizontalAlignment="Left"
+                   Height="100" 
+                   Width="100"
+                   Margin="0 0 0 10"
+                   Source="D:\Profile\Photo-Video-Stack-Of-Photos-icon.png" />
+            <!-- Button for changing profile picture-->
+            <Button Name="ChangePictureButton"
+                    Foreground="White" 
+                    Background="#008080" 
+                    HorizontalAlignment="Left" 
+                    Padding="2"
+                    Width="100" 
+                    FontSize="15"
+                    FontFamily="Helvetica" 
+                    FontWeight="Light" 
+                    Content="Change Photo" MouseEnter="Change_Photo_Button_Entered" MouseLeave="Change_Photo_Button_Left" />
+
+            <!-- Profile Name-->
+            <Grid Margin="0 20 0 15" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock  Grid.Column="0"
+                            FontSize="15"
+                            FontFamily="Helvetica" 
+                            FontWeight="Light" 
+                            Text="Full Name" />
+
+                <TextBox x:Name="Name"                        
+                         Background="Transparent"
+                         Margin="0 0 150 0"
+                         Padding="2" 
+                         Grid.Column="1"/>
+
+            </Grid>
+
+            <!--User Name-->
+            <Grid Margin="0 0 0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock FontSize="15"
+                           Grid.Column="0"
+                           Text="Username"
+                           FontFamily="Helvetica" 
+                           FontWeight="Light"  />
+
+                <TextBox  x:Name="UserName" 
+                          Padding="2" 
+                          Margin="0 0 150 0"
+                          Grid.Column="1"/>
+
+
+
+            </Grid>
+
+
+            <Button
+                    x:Name="SubmitButton"
+                    Foreground="White" 
+                    Background="#008080" 
+                    HorizontalAlignment="Left" 
+                    Padding="2"
+                    Width="100" 
+                    FontSize="15"
+                    FontFamily="Helvetica" 
+                    FontWeight="Light" 
+                    Content="Submit" MouseEnter="Submit_Button_Entered" MouseLeave="Submit_Button_Left" />
+
+
+
+
+
+
+        </StackPanel>
+    </Border>
+</Window>
