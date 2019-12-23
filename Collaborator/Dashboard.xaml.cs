@@ -147,5 +147,17 @@ namespace Collaborator
             ChatMessageScroll.ScrollToBottom();
 
         }
+
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Profile_Click(object sender, RoutedEventArgs e)
+        {
+            Profile profile = new Profile();
+            profile.Show();
+            this.Hide();
+        }
     }
 }
