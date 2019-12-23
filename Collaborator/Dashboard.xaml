@@ -41,12 +41,18 @@
 
         <Grid Grid.Column="0" Grid.Row="1" Background="White">
             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                <Button x:Name="Profile"
+                        Click="Profile_Click" Content="Profile"
+                        FontFamily="Helvetica" FontWeight="Light" FontSize="16"
+                        Background="Transparent" Foreground="DarkCyan">
+                    
+                </Button>
                 <TextBox 
                     x:Name="SearchTextBox"
                     Margin="10 20" 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                     materialDesign:HintAssist.Hint="Search"
-                    FontFamily="Helvetica" FontWeight="Light" FontSize="16"/>
+                    FontFamily="Helvetica" FontWeight="Light" FontSize="16" TextChanged="SearchTextBox_TextChanged"/>
 
                 <ListView x:Name="ContactList" SelectionChanged="ContactList_SelectionChanged">
                     <ListView.ItemTemplate>
