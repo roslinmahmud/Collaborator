@@ -20,19 +20,21 @@ namespace Collaborator
     /// </summary>
     public partial class Profile : Window
     {
-        public string username=User.Instance.UserName;
-        public string fullname=User.Instance.Name;
+        public string username = User.Instance.UserName;
+        public string fullname = User.Instance.Name;
+        public Dashboard dashboard;
 
-        public Profile()
+        public Profile(Dashboard d)
         {
+            dashboard=d;
             InitializeComponent();
-             Show_Details();
+            Show_Details();
         }
         public void Show_Details()
         {
-            UserName.Text=username;
-           Profile_Name.Text=fullname;
-            
+            UserName.Text = username;
+            Profile_Name.Text = fullname;
+
 
         }
         private void Change_Photo_Button_Entered(object sender, MouseEventArgs e)
@@ -102,8 +104,10 @@ namespace Collaborator
         public void Update_Fullname(String New_Fullname)
         {
             DBConnection.Instance.Connect();
+            // String query="UPDATE USER SET id, username, name, photo_path, ip FROM USER WHERE USERNAME='" + username + "' AND PASSWORD='" + password + "';";
 
-            String query = "UPDATE USER SET ='" + New_Fullname + "' WHERE username='" + username + "';";
+
+            String query = "UPDATE USER SET name='" + New_Fullname + "' WHERE username='" + username + "';";
             try
             {
                 using (MySqlCommand mySqlCommand = new MySqlCommand(query, DBConnection.Instance.Connection))
@@ -135,7 +139,7 @@ namespace Collaborator
                 {
                     if (mySqlCommand.ExecuteNonQuery() > 0)
                     {
-                        
+
                         Update_Message.Text = "Successfully Updated!";
                         Update_Message.Foreground = new SolidColorBrush(Colors.Green);
                     }
@@ -155,7 +159,7 @@ namespace Collaborator
 
         private void Set_Password_Clicked(object sender, RoutedEventArgs e)
         {
-            Password obj = new Password();
+            Password obj = new Password(this);
             obj.Show();
             this.Hide();
         }

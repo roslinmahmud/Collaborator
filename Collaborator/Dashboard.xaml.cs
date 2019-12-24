@@ -155,7 +155,7 @@ namespace Collaborator
 
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
-            Profile profile = new Profile();
+            Profile profile = new Profile(this);
             profile.Show();
             this.Hide();
         }

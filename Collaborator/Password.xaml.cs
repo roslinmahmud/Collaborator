@@ -20,9 +20,11 @@ namespace Collaborator
     /// </summary>
     public partial class Password : Window
     {
+        public Password password;
         String username = User.Instance.Name;
-        public Password()
+        public Password(Password p)
         {
+            password=p;
             InitializeComponent();
         }
         private void Change_Password_Entered(object sender, MouseEventArgs e)
@@ -41,7 +43,7 @@ namespace Collaborator
         public void Update_Password(String New_Password)
         {
             DBConnection.Instance.Connect();
-            
+
 
             String query = "UPDATE USER SET password='" + New_Password + "' WHERE username='" + username + "';";
             try
@@ -64,7 +66,7 @@ namespace Collaborator
         public bool Check_Password(String Given_Password)
         {
             DBConnection.Instance.Connect();
-            string query = "SELECT password FROM USER WHERE USERNAME='" + username +  "';";
+            string query = "SELECT password FROM USER WHERE USERNAME='" + username + "';";
             try
             {
                 using (MySqlCommand mySqlCommand = new MySqlCommand(query, DBConnection.Instance.Connection))
@@ -72,7 +74,7 @@ namespace Collaborator
                     MySqlDataReader dataReader = mySqlCommand.ExecuteReader();
                     if (dataReader.Read())
                     {
-                        if (dataReader.GetString(0)==Given_Password)
+                        if (dataReader.GetString(0) == Given_Password)
                         {
                             return true;
                         }
@@ -80,7 +82,7 @@ namespace Collaborator
                         {
                             return false;
                         }
-                        
+
                     }
                     return false;
                 }
@@ -95,23 +97,25 @@ namespace Collaborator
         }
         private void Change_Password_Clicked(object sender, RoutedEventArgs e)
         {
-            
+
+            Password_Update_Message.Text = "";
             String Current_Password = Cur_Password.Text;
             String New_Password = N_Password.Text;
             String Confirm_Password = C_Password.Text;
             bool valid = Check_Password(Current_Password); ;
-            
-             if (New_Password=="")
+
+            if (New_Password == "")
             {
                 Password_Update_Message.Text = "New password field can not be empty!";
                 Password_Update_Message.Foreground = new SolidColorBrush(Colors.Red);
             }
-            else if (New_Password!=Confirm_Password)
-            {
-                Password_Update_Message.Text = "Sorry, confirm password and new password has not been matched!";
-                Password_Update_Message.Foreground = new SolidColorBrush(Colors.Red);
+            /* else if (New_Password!=Confirm_Password)
+             {
+                 Password_Update_Message.Text = "Sorry, confirm password and new password has not been matched!";
+                 Password_Update_Message.Foreground = new SolidColorBrush(Colors.Red);
 
-            }
+             }
+             */
             else if (valid == false)
             {
 
@@ -121,8 +125,8 @@ namespace Collaborator
             }
             else
             {
-                    Update_Password(New_Password);
-                
+                Update_Password(New_Password);
+
             }
         }
     }
