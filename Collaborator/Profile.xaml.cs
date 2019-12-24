@@ -20,8 +20,8 @@ namespace Collaborator
     /// </summary>
     public partial class Profile : Window
     {
-        public string username;
-        public string fullname;
+        public string username=User.Instance.UserName;
+        public string fullname=User.Instance.Name;
 
         public Profile()
         {
@@ -52,33 +52,49 @@ namespace Collaborator
             SubmitButton.Background = new SolidColorBrush(new_color);
             SubmitButton.Foreground = new SolidColorBrush(Colors.White);
         }
+        private void Set_Password_Entered(object sender, MouseEventArgs e)
+        {
+            Set_Password.Background = new SolidColorBrush(Colors.Gray);
+            Set_Password.Foreground = new SolidColorBrush(Colors.Black);
+
+        }
+
+        private void Set_Password_Left(object sender, MouseEventArgs e)
+        {
+            Color new_color = (Color)ColorConverter.ConvertFromString("#008080");
+            Set_Password.Background = new SolidColorBrush(new_color);
+            Set_Password.Foreground = new SolidColorBrush(Colors.White);
+        }
 
         private void Submit_Button_Clicked(object sender, RoutedEventArgs e)
         {
             String New_Username = UserName.Text;
             String New_Fullname = Name.Text;
-            if (New_Username==""||New_Fullname=="")
+            bool validity = true;
+
+            if (New_Username == "" || New_Fullname == "")
             {
+                validity = false;
                 Update_Message.Text = "Username field or full name field can't be empty!";
                 Update_Message.Foreground = new SolidColorBrush(Colors.Red);
             }
-            else if (New_Username!=username)
+            else if (New_Username != username && validity)
             {
                 Update_Username(New_Username);
             }
-            if (New_Fullname!=fullname)
+            if (New_Fullname != fullname && validity)
             {
                 Update_Fullname(New_Fullname);
             }
-            
-            
-            
+
+
+
 
         }
         public void Update_Fullname(String New_Fullname)
         {
             DBConnection.Instance.Connect();
-            
+
             String query = "UPDATE USER SET ='" + New_Fullname + "' WHERE username='" + username + "';";
             try
             {
@@ -125,6 +141,12 @@ namespace Collaborator
 
 
         }
-       
+
+        private void Set_Password_Clicked(object sender, RoutedEventArgs e)
+        {
+            Password obj = new Password();
+            obj.Show();
+            this.Hide();
+        }
     }
 }

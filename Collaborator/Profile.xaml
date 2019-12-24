@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:Collaborator"
         mc:Ignorable="d"
        Title="Profile" Height="600" Width="800">
-    <Border   Padding="100">
+    <Border   Padding="2">
         <StackPanel Orientation="Vertical" 
-                    RenderTransformOrigin="0.5,0.5"
+                  
                     Margin="20 0 0 0">
 
 
@@ -90,8 +90,28 @@
                     FontWeight="Light" 
                     Content="Submit"
                     MouseEnter="Submit_Button_Entered" 
-                    MouseLeave="Submit_Button_Left" Click="Submit_Button_Clicked" 
+                    MouseLeave="Submit_Button_Left"
+                   Click="Submit_Button_Clicked" 
+                    Margin="0 0 0 0"
                      />
+
+            <Button
+                    x:Name="Set_Password"
+                    Margin="0 20 0 0"
+                    Foreground="White" 
+                    Background="#008080" 
+                    HorizontalAlignment="Left" 
+                    Padding="2"
+                    Width="200" 
+                    FontSize="15"
+                    FontFamily="Helvetica" 
+                    FontWeight="Light" 
+                    Content="Set Password" 
+                 MouseEnter="Set_Password_Entered"
+                MouseLeave="Set_Password_Left" 
+                Click="Set_Password_Clicked"
+                />
+
 
 
 
