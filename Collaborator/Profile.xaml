@@ -44,7 +44,7 @@
                             FontWeight="Light" 
                             Text="Full Name" />
 
-                <TextBox x:Name="Name"                        
+                <TextBox x:Name="Profile_Name"                        
                          Background="Transparent"
                          Margin="0 0 150 0"
                          Padding="2" 

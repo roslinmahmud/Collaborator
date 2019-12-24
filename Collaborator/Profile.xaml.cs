@@ -26,6 +26,14 @@ namespace Collaborator
         public Profile()
         {
             InitializeComponent();
+             Show_Details();
+        }
+        public void Show_Details()
+        {
+            UserName.Text=username;
+           Profile_Name.Text=fullname;
+            
+
         }
         private void Change_Photo_Button_Entered(object sender, MouseEventArgs e)
         {
@@ -69,7 +77,7 @@ namespace Collaborator
         private void Submit_Button_Clicked(object sender, RoutedEventArgs e)
         {
             String New_Username = UserName.Text;
-            String New_Fullname = Name.Text;
+            String New_Fullname = Profile_Name.Text;
             bool validity = true;
 
             if (New_Username == "" || New_Fullname == "")
@@ -125,9 +133,12 @@ namespace Collaborator
             {
                 using (MySqlCommand mySqlCommand = new MySqlCommand(query, DBConnection.Instance.Connection))
                 {
-                    mySqlCommand.ExecuteNonQuery();
-                    Update_Message.Text = "Successfully Updated!";
-                    Update_Message.Foreground = new SolidColorBrush(Colors.Green);
+                    if (mySqlCommand.ExecuteNonQuery() > 0)
+                    {
+                        
+                        Update_Message.Text = "Successfully Updated!";
+                        Update_Message.Foreground = new SolidColorBrush(Colors.Green);
+                    }
 
 
                 }
