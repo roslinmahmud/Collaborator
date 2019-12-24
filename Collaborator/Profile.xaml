@@ -12,26 +12,7 @@
                     Margin="20 0 0 0">
 
 
-            <!-- Profile Picture-->
-
-            <Image Name="ProfilePicture"
-                   HorizontalAlignment="Left"
-                   Height="100" 
-                   Width="100"
-                   Margin="0 0 0 10"
-                   Source="D:\Profile\Photo-Video-Stack-Of-Photos-icon.png" />
-            <!-- Button for changing profile picture-->
-            <Button Name="ChangePictureButton"
-                    Foreground="White" 
-                    Background="#008080" 
-                    HorizontalAlignment="Left" 
-                    Padding="2"
-                    Width="100" 
-                    FontSize="15"
-                    FontFamily="Helvetica" 
-                    FontWeight="Light" 
-                    Content="Change Photo" MouseEnter="Change_Photo_Button_Entered" MouseLeave="Change_Photo_Button_Left" />
-
+           
             <!-- Profile Name-->
             <Grid Margin="0 20 0 15" >
                 <Grid.ColumnDefinitions>
@@ -44,7 +25,7 @@
                             FontWeight="Light" 
                             Text="Full Name" />
 
-                <TextBox x:Name="Profile_Name"                        
+                <TextBox x:Name="P_Name"                        
                          Background="Transparent"
                          Margin="0 0 150 0"
                          Padding="2" 
@@ -110,6 +91,22 @@
                  MouseEnter="Set_Password_Entered"
                 MouseLeave="Set_Password_Left" 
                 Click="Set_Password_Clicked"
+                />
+          <Button
+                              x:Name="Back_Button"
+                              Margin="0 20 0 0"
+                              Foreground="White"
+                              Background="#008080"
+                              HorizontalAlignment="Left"
+                              Padding="2"
+                              Width="200"
+                              FontSize="15"
+                              FontFamily="Helvetica"
+                              FontWeight="Light"
+                              Content="Back"
+                              Click="Back_Button_Clicked"
+                           
+                            
                 />
 
 

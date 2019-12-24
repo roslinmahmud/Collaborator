@@ -20,11 +20,11 @@ namespace Collaborator
     /// </summary>
     public partial class Password : Window
     {
-        public Password password;
+        public Profile profile;
         String username = User.Instance.Name;
-        public Password(Password p)
+        public Password(Profile p)
         {
-            password=p;
+            profile=p;
             InitializeComponent();
         }
         private void Change_Password_Entered(object sender, MouseEventArgs e)
@@ -94,14 +94,15 @@ namespace Collaborator
                 return false;
             }
 
+
         }
         private void Change_Password_Clicked(object sender, RoutedEventArgs e)
         {
 
             Password_Update_Message.Text = "";
-            String Current_Password = Cur_Password.Text;
-            String New_Password = N_Password.Text;
-            String Confirm_Password = C_Password.Text;
+            String Current_Password = Cur_Password.Password;
+            String New_Password = N_Password.Password;
+            String Confirm_Password = C_Password.Password;
             bool valid = Check_Password(Current_Password); ;
 
             if (New_Password == "")
@@ -129,5 +130,12 @@ namespace Collaborator
 
             }
         }
+        private void Back_Button_Clicked(object sender, RoutedEventArgs e)
+        {
+
+            profile.Show();
+            this.Hide();
+        }
     }
-}
+        
+    }

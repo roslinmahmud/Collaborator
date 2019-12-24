@@ -27,28 +27,20 @@ namespace Collaborator
         public Profile(Dashboard d)
         {
             dashboard=d;
+            
             InitializeComponent();
             Show_Details();
+          
+
+
         }
         public void Show_Details()
         {
+          
+            P_Name.Text = fullname;
             UserName.Text = username;
-            Profile_Name.Text = fullname;
-
-
-        }
-        private void Change_Photo_Button_Entered(object sender, MouseEventArgs e)
-        {
-            ChangePictureButton.Background = new SolidColorBrush(Colors.Gray);
-            ChangePictureButton.Foreground = new SolidColorBrush(Colors.Black);
         }
 
-        private void Change_Photo_Button_Left(object sender, MouseEventArgs e)
-        {
-            Color new_color = (Color)ColorConverter.ConvertFromString("#008080");
-            ChangePictureButton.Background = new SolidColorBrush(new_color);
-            ChangePictureButton.Foreground = new SolidColorBrush(Colors.White);
-        }
         private void Submit_Button_Entered(object sender, MouseEventArgs e)
         {
             SubmitButton.Background = new SolidColorBrush(Colors.Gray);
@@ -79,7 +71,7 @@ namespace Collaborator
         private void Submit_Button_Clicked(object sender, RoutedEventArgs e)
         {
             String New_Username = UserName.Text;
-            String New_Fullname = Profile_Name.Text;
+            String New_Fullname = P_Name.Text;
             bool validity = true;
 
             if (New_Username == "" || New_Fullname == "")
@@ -161,6 +153,12 @@ namespace Collaborator
         {
             Password obj = new Password(this);
             obj.Show();
+            this.Hide();
+        }
+        private void Back_Button_Clicked(object sender, RoutedEventArgs e)
+        {
+           
+            dashboard.Show();
             this.Hide();
         }
     }
