@@ -78,21 +78,28 @@ namespace Collaborator
                 for (int i = 0; i < contacts.Count; i++)
                 {
                     iP = IPAddress.Parse(contacts[i].Ip);
-                    if (ping.Send(iP).Status == IPStatus.Success)
+                    try
                     {
-                        contacts[i].Alive = true;
-                        if (contacts[i].Client == null)
+                        if (ping.Send(iP).Status == IPStatus.Success)
                         {
-                            contacts[i].Client = GetClient(contacts[i]);
+                            contacts[i].Alive = true;
+                            if (contacts[i].Client == null)
+                            {
+                                contacts[i].Client = GetClient(contacts[i]);
+                            }
+                        }
+                        else
+                        {
+                            contacts[i].Alive = false;
+                            if (contacts[i].Client != null)
+                            {
+                                contacts[i].Client = null;
+                            }
                         }
                     }
-                    else
+                    catch(Exception ep)
                     {
-                        contacts[i].Alive = false;
-                        if (contacts[i].Client != null)
-                        {
-                            contacts[i].Client = null;
-                        }
+                        //MessageBox.Show(ep.Message, this.ToString() + " Ping() Exception", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 Thread.Sleep(10000);

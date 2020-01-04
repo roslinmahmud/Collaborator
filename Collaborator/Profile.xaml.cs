@@ -41,6 +41,29 @@ namespace Collaborator
             UserName.Text = username;
         }
 
+        private void TopPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void CloseIcon_MouseEnter(object sender, MouseEventArgs e)
+        {
+            CloseIcon.Foreground = Brushes.Red;
+        }
+
+        private void CloseIcon_MouseLeave(object sender, MouseEventArgs e)
+        {
+            CloseIcon.Foreground = Brushes.White;
+        }
+
         private void Submit_Button_Entered(object sender, MouseEventArgs e)
         {
             SubmitButton.Background = new SolidColorBrush(Colors.Gray);

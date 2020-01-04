@@ -41,12 +41,6 @@
 
         <Grid Grid.Column="0" Grid.Row="1" Background="White">
             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                <Button x:Name="Profile"
-                        Click="Profile_Click" Content="Profile"
-                        FontFamily="Helvetica" FontWeight="Light" FontSize="16"
-                        Background="Transparent" Foreground="DarkCyan">
-                    
-                </Button>
                 <TextBox 
                     x:Name="SearchTextBox"
                     Margin="10 20" 
@@ -66,25 +60,33 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
-
-            <Button
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                <Button
                 x:Name="Logout"
                     Background="Transparent"
                     Click="Logout_Click"
                     HorizontalAlignment="Left" VerticalAlignment="Bottom"
                     Margin="10 10">
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon 
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon 
                             Kind="Logout" 
                             Width="20" Height="20"
                             Background="Transparent" Foreground="Black"/>
-                    <TextBlock
+                        <TextBlock
                             Foreground="Black"
                             FontFamily="Helvetica" FontWeight="DemiBold" FontSize="15">
                             Logout
-                    </TextBlock>
-                </StackPanel>
-            </Button>
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="Profile"
+                        Click="Profile_Click" Content="Profile"
+                        Foreground="Black" Background="Transparent"
+                        FontFamily="Helvetica" FontWeight="DemiBold" FontSize="15">
+
+                </Button>
+            </StackPanel>
+            
         </Grid>
         
         <Grid Grid.Column="1" Grid.Row="1" Background="AliceBlue">

@@ -67,13 +67,7 @@ namespace Collaborator
                 User.Instance.UpdateIP();
             }
         }
-        private void TopPanel_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                DragMove();
-            }
-        }
+        
 
         public string FullName { get; set; }
         public MainWindow MainWindowInstance
@@ -98,6 +92,14 @@ namespace Collaborator
             client.StopClient();
             server.StopServer();
             this.Close();
+        }
+
+        private void TopPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
