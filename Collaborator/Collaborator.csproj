@@ -90,22 +90,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Client.cs" />
-    <Compile Include="Connection.cs" />
+    <Compile Include="BL\Client.cs" />
+    <Compile Include="BL\Connection.cs" />
     <Compile Include="Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs" />
-    <Compile Include="Message.cs" />
+    <Compile Include="BL\Login.cs" />
+    <Compile Include="BL\Message.cs" />
     <Compile Include="Password.xaml.cs">
       <DependentUpon>Password.xaml</DependentUpon>
     </Compile>
     <Compile Include="Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Register.cs" />
-    <Compile Include="Server.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="BL\Register.cs" />
+    <Compile Include="BL\Server.cs" />
+    <Compile Include="BL\User.cs" />
     <Page Include="Dashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -118,7 +118,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DBConnection.cs" />
+    <Compile Include="BL\DBConnection.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
